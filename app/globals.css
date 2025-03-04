@@ -19,3 +19,8 @@ body {
   background: var(--background);
   font-family: Helvetica, Arial, sans-serif;
 }
+
+h1 {
+  font-size: clamp(2.3328rem, 1.7715rem + 2.8067vw, 3.9467rem);
+  line-height: 1;
+}
