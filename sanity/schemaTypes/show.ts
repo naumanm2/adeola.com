@@ -34,12 +34,6 @@ export default defineType({
     //     }),
     // }),
     defineField({
-      name: "subtitle",
-      title: "Subtitle",
-      type: "array",
-      of: [{ type: "string" }],
-    }),
-    defineField({
       name: "date",
       title: "Date",
       type: "datetime",

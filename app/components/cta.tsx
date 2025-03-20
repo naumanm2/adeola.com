@@ -13,8 +13,8 @@ export default function CTA({
   return (
     <>
       <Link href={"/"}>
-        <div className="bg-button border-[.4px] rounded-full bg-black border-white/40 p-1.5 pr-3.5 flex flex-row gap-2">
-          <div className="flex justify-center items-center bg-white rounded-full p-2 pl-[9px]">
+        <div className="bg-button flex flex-row gap-2 rounded-full border-[.4px] border-white/40 bg-black p-1.5 pr-3.5">
+          <div className="flex items-center justify-center rounded-full bg-white p-2 pl-[9px]">
             <svg
               width="8"
               height="9"

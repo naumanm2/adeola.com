@@ -11,22 +11,27 @@
   "dependencies": {
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^3.77.2",
+    "@tailwindcss/cli": "^4.0.14",
+    "autoprefixer": "^10.4.21",
     "next": "15.2.0",
     "next-sanity": "^9.8.60",
+    "postcss": "^8.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sanity": "^3.77.2",
-    "styled-components": "^6.1.15"
+    "styled-components": "^6.1.15",
+    "tailwindcss": "^4.0.14"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
+    "@tailwindcss/postcss": "^4.0.14",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.2.0",
-    "tailwindcss": "^4",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "typescript": "^5"
   }
 }

@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --color-secondary: #ffffff80;
+}
+
 :root {
   --background: #0e2795;
   --foreground: #ffffff;
@@ -21,6 +25,31 @@ body {
 }
 
 h1 {
-  font-size: clamp(2.3328rem, 1.7715rem + 2.8067vw, 3.9467rem);
+  font-size: clamp(3.9976rem, 0.0143rem + 19.9164vw, 15.4495rem);
   line-height: 1;
+  font-weight: 800;
+}
+h2 {
+  font-size: clamp(1.9994rem, 1.3192rem + 3.4012vw, 3.9551rem);
+  line-height: 1;
+  font-weight: 800;
+}
+
+small {
+  font-size: clamp(1rem, 0.9565rem + 0.2174vw, 1.125rem);
+}
+
+/* CUSTOM CLASSES */
+
+.ade-shadow {
+  text-shadow: 0px 4rem 1rem rgba(255, 255, 255, 0.163);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ade-text {
+  background-image: linear-gradient(#ffcee5 0%, #ffcee5 80%, #ffcee500 100%);
+  color: transparent;
+  background-clip: text;
 }

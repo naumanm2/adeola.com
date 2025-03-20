@@ -42,7 +42,7 @@ export default defineType({
       description: "Phone number for contact",
       validation: (Rule) =>
         Rule.length(13).warning(
-          `Phone number with a country code prefix should be exactly 13 characters.`
+          `Phone number with a country code prefix should be exactly 13 characters.`,
         ),
     }),
     defineField({
