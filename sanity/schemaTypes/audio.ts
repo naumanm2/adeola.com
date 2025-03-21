@@ -14,8 +14,7 @@ export default defineType({
     defineField({
       name: "subtitle",
       title: "Subtitle",
-      type: "array",
-      of: [{ type: "string" }],
+      type: "string",
     }),
     defineField({
       name: "audio",
