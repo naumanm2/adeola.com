@@ -1,14 +1,14 @@
-import Image from "next/image";
-import { PortableText } from "@portabletext/react";
-import { sanityFetch } from "@/sanity/lib/live";
-import { urlFor } from "@/sanity/lib/image";
+import Image from 'next/image'
+import { PortableText } from '@portabletext/react'
+import { sanityFetch } from '@/sanity/lib/live'
+import { urlFor } from '@/sanity/lib/image'
 
 const GENERAL_QUERY = `*[_type == "general"][0]{
   title,
   subtitle,
   mainImage,
   introLong
-}`;
+}`
 
 const portableTextComponents = {
   types: {
@@ -16,7 +16,7 @@ const portableTextComponents = {
       <div className="relative w-full aspect-[4/3] my-8">
         <Image
           src={urlFor(value).width(900).url()}
-          alt={value.alt ?? ""}
+          alt={value.alt ?? ''}
           fill
           className="object-cover"
         />
@@ -50,8 +50,8 @@ const portableTextComponents = {
       value,
       children,
     }: {
-      value?: { href: string };
-      children?: React.ReactNode;
+      value?: { href: string }
+      children?: React.ReactNode
     }) => (
       <a
         href={value?.href}
@@ -63,10 +63,10 @@ const portableTextComponents = {
       </a>
     ),
   },
-};
+}
 
 export default async function AboutPage() {
-  const { data: general } = await sanityFetch({ query: GENERAL_QUERY });
+  const { data: general } = await sanityFetch({ query: GENERAL_QUERY })
 
   return (
     <div className="pt-16 md:pt-24">
@@ -78,7 +78,7 @@ export default async function AboutPage() {
           <div className="relative w-full aspect-[3/4]">
             <Image
               src={urlFor(general.mainImage).width(700).url()}
-              alt={general.mainImage.alt ?? ""}
+              alt={general.mainImage.alt ?? ''}
               fill
               className="object-cover"
             />
@@ -103,5 +103,5 @@ export default async function AboutPage() {
         </div>
       </div>
     </div>
-  );
+  )
 }

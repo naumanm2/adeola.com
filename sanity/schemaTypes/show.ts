@@ -1,14 +1,14 @@
-import { defineField, defineType } from "sanity";
+import { defineField, defineType } from 'sanity'
 
 export default defineType({
-  name: "show",
-  title: "Shows",
-  type: "document",
+  name: 'show',
+  title: 'Shows',
+  type: 'document',
   fields: [
     defineField({
-      name: "title",
-      title: "Title",
-      type: "string",
+      name: 'title',
+      title: 'Title',
+      type: 'string',
       validation: (Rule) => Rule.required(),
     }),
 
@@ -34,41 +34,41 @@ export default defineType({
     //     }),
     // }),
     defineField({
-      name: "subtitle",
-      title: "Subtitle",
-      type: "array",
-      of: [{ type: "string" }],
+      name: 'subtitle',
+      title: 'Subtitle',
+      type: 'array',
+      of: [{ type: 'string' }],
     }),
     defineField({
-      name: "date",
-      title: "Date",
-      type: "datetime",
+      name: 'date',
+      title: 'Date',
+      type: 'datetime',
     }),
     defineField({
-      title: "Is it an upcoming show?",
-      name: "live",
-      type: "boolean",
+      title: 'Is it an upcoming show?',
+      name: 'live',
+      type: 'boolean',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "tickets",
-      title: "Tickets",
-      type: "array",
+      name: 'tickets',
+      title: 'Tickets',
+      type: 'array',
       of: [
         {
-          type: "object",
-          name: "inline",
+          type: 'object',
+          name: 'inline',
           fields: [
             {
-              title: "Venue",
-              type: "string",
-              name: "venue",
+              title: 'Venue',
+              type: 'string',
+              name: 'venue',
               validation: (Rule) => Rule.required(),
             },
             {
-              title: "Web address",
-              type: "url",
-              name: "url",
+              title: 'Web address',
+              type: 'url',
+              name: 'url',
               validation: (Rule) => Rule.required(),
             },
           ],
@@ -76,19 +76,19 @@ export default defineType({
       ],
     }),
     defineField({
-      name: "mainImage",
-      title: "Main Image",
-      type: "image",
+      name: 'mainImage',
+      title: 'Main Image',
+      type: 'image',
       options: {
         hotspot: true,
       },
       fields: [
         {
-          name: "alt",
-          type: "string",
-          title: "Alternative text",
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative text',
         },
       ],
     }),
   ],
-});
+})

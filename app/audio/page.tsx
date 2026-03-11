@@ -1,14 +1,14 @@
-import Image from "next/image";
-import { sanityFetch } from "@/sanity/lib/live";
-import { urlFor } from "@/sanity/lib/image";
+import Image from 'next/image'
+import { sanityFetch } from '@/sanity/lib/live'
+import { urlFor } from '@/sanity/lib/image'
 
 type Track = {
-  _id: string;
-  title: string;
-  subtitle?: string;
-  audio?: { asset: { url: string } };
-  coverImage?: { asset: object; alt?: string };
-};
+  _id: string
+  title: string
+  subtitle?: string
+  audio?: { asset: { url: string } }
+  coverImage?: { asset: object; alt?: string }
+}
 
 const AUDIO_QUERY = `*[_type == "audio"] | order(_createdAt desc){
   _id,
@@ -16,10 +16,10 @@ const AUDIO_QUERY = `*[_type == "audio"] | order(_createdAt desc){
   subtitle,
   audio { asset->{ url } },
   coverImage
-}`;
+}`
 
 export default async function AudioPage() {
-  const { data: tracks } = await sanityFetch({ query: AUDIO_QUERY });
+  const { data: tracks } = await sanityFetch({ query: AUDIO_QUERY })
 
   return (
     <div className="pt-16 md:pt-24">
@@ -28,7 +28,10 @@ export default async function AudioPage() {
       {tracks && tracks.length > 0 ? (
         <div className="mt-12 flex flex-col gap-10">
           {tracks.map((track: Track) => (
-            <div key={track._id} className="flex flex-col gap-4 border-t border-white/10 pt-8">
+            <div
+              key={track._id}
+              className="flex flex-col gap-4 border-t border-white/10 pt-8"
+            >
               <div className="flex gap-5 items-start">
                 {track.coverImage ? (
                   <div className="relative shrink-0 w-20 h-20 md:w-28 md:h-28">
@@ -68,5 +71,5 @@ export default async function AudioPage() {
         </p>
       )}
     </div>
-  );
+  )
 }
