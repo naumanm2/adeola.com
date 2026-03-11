@@ -12,7 +12,7 @@ export default function CTA({
 }) {
   return (
     <>
-      <Link href={"/"}>
+      <Link href={link} target={external ? "_blank" : undefined} rel={external ? "noopener noreferrer" : undefined}>
         <div className="bg-button border-[.4px] rounded-full bg-black border-white/40 p-1.5 pr-3.5 flex flex-row gap-2">
           <div className="flex justify-center items-center bg-white rounded-full p-2 pl-[9px]">
             <svg
