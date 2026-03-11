@@ -1,14 +1,14 @@
-import Image from "next/image";
-import { sanityFetch } from "@/sanity/lib/live";
-import { urlFor } from "@/sanity/lib/image";
-import CTA from "./components/cta";
+import Image from 'next/image'
+import { sanityFetch } from '@/sanity/lib/live'
+import { urlFor } from '@/sanity/lib/image'
+import CTA from './components/cta'
 
 const GENERAL_QUERY = `*[_type == "general"][0]{
   title,
   subtitle,
   mainImage,
   introShort
-}`;
+}`
 
 const UPCOMING_SHOWS_QUERY = `*[_type == "show" && live == true] | order(date asc) [0...3]{
   _id,
@@ -16,11 +16,11 @@ const UPCOMING_SHOWS_QUERY = `*[_type == "show" && live == true] | order(date as
   subtitle,
   date,
   tickets
-}`;
+}`
 
 export default async function Home() {
-  const { data: general } = await sanityFetch({ query: GENERAL_QUERY });
-  const { data: shows } = await sanityFetch({ query: UPCOMING_SHOWS_QUERY });
+  const { data: general } = await sanityFetch({ query: GENERAL_QUERY })
+  const { data: shows } = await sanityFetch({ query: UPCOMING_SHOWS_QUERY })
 
   return (
     <div className="flex flex-col">
@@ -30,14 +30,14 @@ export default async function Home() {
           <div className="relative w-full max-w-sm aspect-[3/4] mb-10">
             <Image
               src={urlFor(general.mainImage).width(600).url()}
-              alt={general.mainImage.alt ?? ""}
+              alt={general.mainImage.alt ?? ''}
               fill
               className="object-cover"
               priority
             />
           </div>
         )}
-        <h1>{general?.title ?? "ADEOLA"}</h1>
+        <h1>{general?.title ?? 'ADEOLA'}</h1>
         {general?.subtitle && (
           <p className="text-white/60 mt-3 text-lg">{general.subtitle}</p>
         )}
@@ -55,42 +55,44 @@ export default async function Home() {
             Upcoming Shows
           </p>
           <div className="flex flex-col">
-            {shows.map((show: {
-              _id: string;
-              title: string;
-              subtitle?: string[];
-              date?: string;
-              tickets?: { venue: string; url: string }[];
-            }) => (
-              <div
-                key={show._id}
-                className="flex items-center justify-between border-t border-white/10 py-5"
-              >
-                <div className="flex flex-col gap-1">
-                  <p className="font-medium">{show.title}</p>
-                  {show.subtitle && show.subtitle.length > 0 && (
-                    <p className="text-white/50 text-sm">
-                      {show.subtitle.join(" · ")}
-                    </p>
-                  )}
-                  {show.date && (
-                    <p className="text-white/40 text-sm">
-                      {new Date(show.date).toLocaleDateString("en-US", {
-                        month: "long",
-                        day: "numeric",
-                        year: "numeric",
-                      })}
-                    </p>
+            {shows.map(
+              (show: {
+                _id: string
+                title: string
+                subtitle?: string[]
+                date?: string
+                tickets?: { venue: string; url: string }[]
+              }) => (
+                <div
+                  key={show._id}
+                  className="flex items-center justify-between border-t border-white/10 py-5"
+                >
+                  <div className="flex flex-col gap-1">
+                    <p className="font-medium">{show.title}</p>
+                    {show.subtitle && show.subtitle.length > 0 && (
+                      <p className="text-white/50 text-sm">
+                        {show.subtitle.join(' · ')}
+                      </p>
+                    )}
+                    {show.date && (
+                      <p className="text-white/40 text-sm">
+                        {new Date(show.date).toLocaleDateString('en-US', {
+                          month: 'long',
+                          day: 'numeric',
+                          year: 'numeric',
+                        })}
+                      </p>
+                    )}
+                  </div>
+                  {show.tickets && show.tickets[0] && (
+                    <CTA link={show.tickets[0].url} text="Tickets" external />
                   )}
                 </div>
-                {show.tickets && show.tickets[0] && (
-                  <CTA link={show.tickets[0].url} text="Tickets" external />
-                )}
-              </div>
-            ))}
+              )
+            )}
           </div>
         </div>
       )}
     </div>
-  );
+  )
 }

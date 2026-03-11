@@ -1,18 +1,18 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import Container from "./components/container";
-import Nav from "./components/nav";
-import { SanityLive } from "@/sanity/lib/live";
+import type { Metadata } from 'next'
+import './globals.css'
+import Container from './components/container'
+import Nav from './components/nav'
+import { SanityLive } from '@/sanity/lib/live'
 
 export const metadata: Metadata = {
-  title: "Adeola",
-  description: "Adeola",
-};
+  title: 'Adeola',
+  description: 'Adeola',
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
@@ -24,5 +24,5 @@ export default function RootLayout({
         <SanityLive />
       </body>
     </html>
-  );
+  )
 }

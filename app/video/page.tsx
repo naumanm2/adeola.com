@@ -1,16 +1,16 @@
-import Image from "next/image";
-import Link from "next/link";
-import { sanityFetch } from "@/sanity/lib/live";
-import { urlFor } from "@/sanity/lib/image";
+import Image from 'next/image'
+import Link from 'next/link'
+import { sanityFetch } from '@/sanity/lib/live'
+import { urlFor } from '@/sanity/lib/image'
 
 type Video = {
-  _id: string;
-  title: string;
-  subtitle?: string[];
-  date?: string;
-  thumbnail?: { asset: object; alt?: string };
-  videourl: string;
-};
+  _id: string
+  title: string
+  subtitle?: string[]
+  date?: string
+  thumbnail?: { asset: object; alt?: string }
+  videourl: string
+}
 
 const VIDEO_QUERY = `*[_type == "video"] | order(date desc){
   _id,
@@ -19,10 +19,10 @@ const VIDEO_QUERY = `*[_type == "video"] | order(date desc){
   date,
   thumbnail,
   videourl
-}`;
+}`
 
 export default async function VideoPage() {
-  const { data: videos } = await sanityFetch({ query: VIDEO_QUERY });
+  const { data: videos } = await sanityFetch({ query: VIDEO_QUERY })
 
   return (
     <div className="pt-16 md:pt-24">
@@ -73,15 +73,15 @@ export default async function VideoPage() {
                 </p>
                 {video.subtitle && video.subtitle.length > 0 && (
                   <p className="text-white/50 text-sm">
-                    {video.subtitle.join(" · ")}
+                    {video.subtitle.join(' · ')}
                   </p>
                 )}
                 {video.date && (
                   <p className="text-white/30 text-sm">
-                    {new Date(video.date).toLocaleDateString("en-US", {
-                      month: "long",
-                      day: "numeric",
-                      year: "numeric",
+                    {new Date(video.date).toLocaleDateString('en-US', {
+                      month: 'long',
+                      day: 'numeric',
+                      year: 'numeric',
                     })}
                   </p>
                 )}
@@ -95,5 +95,5 @@ export default async function VideoPage() {
         </p>
       )}
     </div>
-  );
+  )
 }
