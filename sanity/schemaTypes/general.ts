@@ -36,6 +36,19 @@ export default defineType({
       ],
     }),
     defineField({
+      name: 'profileImage',
+      title: 'Profile Image',
+      description: 'Image used in the Bio/Quote section on the front page',
+      type: 'image',
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative text',
+        },
+      ],
+    }),
+    defineField({
       name: 'phone',
       title: 'Phone Number',
       type: 'string',

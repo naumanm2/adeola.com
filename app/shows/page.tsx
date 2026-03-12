@@ -278,7 +278,7 @@ export default async function ShowsPage() {
         </div>
         <div className="flex items-center justify-center pt-3 w-full">
           <p className="text-xs tracking-widest text-white">
-            cc. Adeola Ikuesan 2025
+            cc. Adeola Ikuesan 2026
           </p>
         </div>
       </div>
