@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import { sanityFetch } from '@/sanity/lib/live'
 import { urlFor, hasAsset } from '@/sanity/lib/image'
-import SiteFooter from '../components/site-footer'
 
 type Track = {
   _id: string
@@ -19,35 +18,20 @@ const AUDIO_QUERY = `*[_type == "audio"] | order(_createdAt desc){
   coverImage
 }`
 
-export default async function AudioPage() {
+export default async function AudioSection() {
   const { data: tracks } = await sanityFetch({ query: AUDIO_QUERY })
   const trackList: Track[] = tracks ?? []
 
   return (
-    <div className="flex flex-col">
-      {/* Hero */}
-      <section className="pt-16 md:pt-24">
-        <div className="flex items-start gap-2 leading-none">
-          <p className="display-section">Audio</p>
-          <span className="text-gradient-gold text-lg md:text-2xl font-bold">
-            ({trackList.length})
-          </span>
-        </div>
-        <div className="relative mt-6 flex flex-col items-center overflow-hidden">
-          <span className="display-giant display-giant--xl whitespace-nowrap text-white">
-            AUDIO
-          </span>
-          <span
-            className="display-giant display-giant--xl reflect whitespace-nowrap"
-            aria-hidden="true"
-          >
-            AUDIO
-          </span>
-        </div>
-      </section>
+    <section id="audio" className="scroll-mt-24">
+      <div className="flex items-baseline gap-2">
+        <p className="display-section">Audio</p>
+        <span className="text-gradient-gold text-sm md:text-base font-bold">
+          ({trackList.length})
+        </span>
+      </div>
 
-      {/* Tracks */}
-      <section className="mt-12 md:mt-20">
+      <div className="mt-6 md:mt-8">
         {trackList.length > 0 ? (
           <div className="flex flex-col">
             {trackList.map((track) => (
@@ -70,11 +54,9 @@ export default async function AudioPage() {
                     <div className="h-20 w-20 shrink-0 bg-white/5 md:h-24 md:w-24 lg:h-28 lg:w-28" />
                   )}
                   <div className="flex flex-col gap-1">
-                    <p className="text-lg md:text-xl font-bold uppercase tracking-widest text-white">
-                      {track.title}
-                    </p>
+                    <p className="show-title text-white">{track.title}</p>
                     {track.subtitle && (
-                      <p className="text-sm tracking-wide text-white/60 md:text-base">
+                      <p className="text-sm tracking-wide text-white/60">
                         {track.subtitle}
                       </p>
                     )}
@@ -83,7 +65,7 @@ export default async function AudioPage() {
 
                 <div className="md:flex-1 md:max-w-md">
                   {track.audio?.asset?.url ? (
-                    <div className="bg-white/5 p-2 rounded-full">
+                    <div className="rounded-full bg-white/5 p-2">
                       <audio
                         controls
                         src={track.audio.asset.url}
@@ -105,9 +87,7 @@ export default async function AudioPage() {
             No tracks yet.
           </p>
         )}
-      </section>
-
-      <SiteFooter wordmark="AUDIO" />
-    </div>
+      </div>
+    </section>
   )
 }

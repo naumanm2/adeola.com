@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import 'lenis/dist/lenis.css';
 
 /* Adeola Design System — tokens sourced from design/adeola-ds/colors_and_type.css */
 :root {
@@ -93,7 +94,7 @@ h1 {
 /* ── Semantic typography ──────────────────────────────────── */
 /* VIDEOS / UPCOMING / PAST / AUDIO / ABOUT section labels */
 .display-section {
-  font-size: 3rem;
+  font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -101,7 +102,7 @@ h1 {
 }
 @media (min-width: 768px) {
   .display-section {
-    font-size: 3.75rem;
+    font-size: 1.5rem;
   }
 }
 
@@ -128,13 +129,13 @@ h1 {
   text-transform: uppercase;
 }
 
-/* Show row title — fluid 1.875–2rem, widest tracking */
+/* Show row title — tightened to read as a uniform list */
 .show-title {
-  font-size: clamp(1.875rem, 4vw, 2.25rem);
+  font-size: 1.125rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  line-height: 1.1;
+  line-height: 1.2;
 }
 
 /* Body paragraph */

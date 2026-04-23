@@ -1,8 +1,7 @@
 import Image from 'next/image'
 import { sanityFetch } from '@/sanity/lib/live'
 import { urlFor, hasAsset } from '@/sanity/lib/image'
-import CTA from '../components/cta'
-import SiteFooter from '../components/site-footer'
+import CTA from '../cta'
 
 type Ticket = { venue: string; url: string }
 
@@ -56,30 +55,26 @@ function ShowRow({ show, muted }: { show: Show; muted?: boolean }) {
     >
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-6">
         {hasAsset(show.mainImage) ? (
-          <div className="relative h-20 w-20 shrink-0 md:h-24 md:w-24">
+          <div className="relative h-16 w-16 shrink-0 md:h-20 md:w-20">
             <Image
-              src={urlFor(show.mainImage).width(300).url()}
+              src={urlFor(show.mainImage).width(240).url()}
               alt={show.mainImage.alt ?? ''}
               fill
-              sizes="96px"
+              sizes="80px"
               className="object-cover"
             />
           </div>
         ) : null}
 
-        <p className="show-title flex-1">{show.title}</p>
+        <p className="show-title flex-1 text-white">{show.title}</p>
 
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-6 md:min-w-[18rem] md:justify-end">
           <div className="flex flex-col gap-1 md:text-right">
             {location && (
-              <p className="text-sm tracking-widest text-white/60 md:text-base">
-                {location}
-              </p>
+              <p className="text-sm tracking-widest text-white/60">{location}</p>
             )}
             {dateStr && (
-              <p className="text-sm tracking-widest text-white/60 md:text-base">
-                {dateStr}
-              </p>
+              <p className="text-sm tracking-widest text-white/60">{dateStr}</p>
             )}
           </div>
           {show.live && show.tickets && show.tickets[0] && (
@@ -93,7 +88,7 @@ function ShowRow({ show, muted }: { show: Show; muted?: boolean }) {
   )
 }
 
-export default async function ShowsPage() {
+export default async function ShowsSection() {
   const { data: shows } = await sanityFetch({ query: SHOWS_QUERY })
   const { data: general } = await sanityFetch({ query: GENERAL_QUERY })
 
@@ -102,48 +97,34 @@ export default async function ShowsPage() {
   const totalCount = upcoming.length + past.length
 
   return (
-    <div className="flex flex-col">
-      {/* Hero */}
-      <section className="pt-20 md:pt-32">
-        <div className="flex items-end justify-between gap-4">
-          <div className="flex items-start gap-2 leading-none">
-            <span
-              className="display-giant display-giant--xl text-white"
-              style={{ fontSize: 'clamp(4rem, 14vw, 12.5rem)' }}
-            >
-              SHOWS
-            </span>
-            <span className="text-gradient-gold text-lg md:text-2xl font-bold">
-              ({totalCount})
-            </span>
-          </div>
-          <div className="flex items-center gap-2 pb-2 md:pb-5 text-white">
-            <span className="text-base md:text-2xl font-medium">Explore</span>
-            <svg
-              width="11"
-              height="13"
-              viewBox="0 0 13 11"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <path d="M13 5.5L0 11L0 0L13 5.5Z" fill="white" />
-            </svg>
-          </div>
-        </div>
-        <div className="relative flex flex-col items-start overflow-hidden">
+    <section id="shows" className="scroll-mt-24">
+      {/* Signature SHOWS giant — the one display-giant moment kept */}
+      <div className="flex items-end justify-between gap-4">
+        <div className="flex items-start gap-2 leading-none">
           <span
-            className="display-giant display-giant--xl reflect whitespace-nowrap"
-            aria-hidden="true"
+            className="display-giant display-giant--xl text-white"
+            style={{ fontSize: 'clamp(4rem, 14vw, 12.5rem)' }}
           >
             SHOWS
           </span>
+          <span className="text-gradient-gold text-lg md:text-2xl font-bold">
+            ({totalCount})
+          </span>
         </div>
-      </section>
+      </div>
+      <div className="relative flex flex-col items-start overflow-hidden">
+        <span
+          className="display-giant display-giant--xl reflect whitespace-nowrap"
+          aria-hidden="true"
+          style={{ fontSize: 'clamp(4rem, 14vw, 12.5rem)' }}
+        >
+          SHOWS
+        </span>
+      </div>
 
       {/* Intro */}
       {(hasAsset(general?.mainImage) || general?.introShort) && (
-        <section className="mt-16 md:mt-24">
+        <div className="mt-12 md:mt-16">
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:gap-10">
             {hasAsset(general?.mainImage) && (
               <div className="relative h-60 w-[180px] shrink-0 md:h-[384px] md:w-[329px] lg:h-[520px] lg:w-[420px]">
@@ -162,14 +143,14 @@ export default async function ShowsPage() {
               </p>
             )}
           </div>
-        </section>
+        </div>
       )}
 
       {/* Upcoming */}
-      <section className="mt-16 md:mt-24 flex w-full flex-col gap-6">
-        <div className="flex items-start gap-2 leading-none">
+      <div className="mt-12 md:mt-16 flex w-full flex-col gap-6">
+        <div className="flex items-baseline gap-2">
           <p className="display-section">Upcoming</p>
-          <span className="text-gradient-gold text-base md:text-xl font-bold">
+          <span className="text-gradient-gold text-sm md:text-base font-bold">
             ({upcoming.length})
           </span>
         </div>
@@ -182,14 +163,14 @@ export default async function ShowsPage() {
             </p>
           )}
         </div>
-      </section>
+      </div>
 
       {/* Past */}
       {past.length > 0 && (
-        <section className="mt-16 md:mt-24 flex w-full flex-col gap-6">
-          <div className="flex items-start gap-2 leading-none">
+        <div className="mt-12 md:mt-16 flex w-full flex-col gap-6">
+          <div className="flex items-baseline gap-2">
             <p className="display-section">Past</p>
-            <span className="text-base md:text-xl font-bold text-white/60">
+            <span className="text-sm md:text-base font-bold text-white/60">
               ({past.length})
             </span>
           </div>
@@ -198,10 +179,8 @@ export default async function ShowsPage() {
               <ShowRow key={show._id} show={show} muted />
             ))}
           </div>
-        </section>
+        </div>
       )}
-
-      <SiteFooter wordmark="ADEOLA" />
-    </div>
+    </section>
   )
 }

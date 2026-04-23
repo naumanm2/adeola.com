@@ -2,20 +2,41 @@
 
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-import { usePathname } from 'next/navigation'
 import CTA from './cta'
 
 const links = [
-  { href: '/shows', label: 'Shows' },
-  { href: '/audio', label: 'Audio' },
-  { href: '/video', label: 'Video' },
+  { id: 'shows', label: 'Shows' },
+  { id: 'audio', label: 'Audio' },
+  { id: 'video', label: 'Video' },
+  { id: 'about', label: 'About' },
 ]
 
 export default function Nav() {
   const [open, setOpen] = useState(false)
-  const pathname = usePathname()
+  const [activeId, setActiveId] = useState<string | null>(null)
   const drawerRef = useRef<HTMLDivElement>(null)
 
+  // Scroll-spy: track which section is most in view
+  useEffect(() => {
+    const sections = links
+      .map(({ id }) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null)
+    if (sections.length === 0) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
+        if (visible[0]) setActiveId(visible[0].target.id)
+      },
+      { rootMargin: '-30% 0px -50% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] }
+    )
+    sections.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
+  // Drawer keyboard handling + body scroll lock
   useEffect(() => {
     if (!open) return
     const onKey = (e: KeyboardEvent) => {
@@ -48,13 +69,6 @@ export default function Nav() {
     }
   }, [open])
 
-  useEffect(() => {
-    setOpen(false)
-  }, [pathname])
-
-  const isActive = (href: string) =>
-    href === '/' ? pathname === '/' : pathname?.startsWith(href)
-
   return (
     <nav
       aria-label="Primary"
@@ -69,21 +83,19 @@ export default function Nav() {
 
       {/* Desktop links */}
       <div className="hidden items-center gap-6 md:flex">
-        {links.map(({ href, label }) => {
-          const active = isActive(href)
+        {links.map(({ id, label }) => {
+          const active = activeId === id
           return (
-            <Link
-              key={href}
-              href={href}
-              aria-current={active ? 'page' : undefined}
+            <a
+              key={id}
+              href={`/#${id}`}
+              aria-current={active ? 'true' : undefined}
               className={`nav-link rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0e2795] ${
-                active
-                  ? 'nav-link--active border-b border-white pb-0.5'
-                  : ''
+                active ? 'nav-link--active border-b border-white pb-0.5' : ''
               }`}
             >
               {label}
-            </Link>
+            </a>
           )
         })}
         <CTA link="mailto:hello@adeola.com" text="Contact" />
@@ -135,19 +147,20 @@ export default function Nav() {
             open ? 'translate-x-0' : '-translate-x-4'
           }`}
         >
-          {links.map(({ href, label }) => {
-            const active = isActive(href)
+          {links.map(({ id, label }) => {
+            const active = activeId === id
             return (
-              <Link
-                key={href}
-                href={href}
-                aria-current={active ? 'page' : undefined}
+              <a
+                key={id}
+                href={`/#${id}`}
+                onClick={() => setOpen(false)}
+                aria-current={active ? 'true' : undefined}
                 className={`text-3xl sm:text-4xl font-bold uppercase tracking-widest rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white ${
                   active ? 'text-white' : 'text-white/60'
                 }`}
               >
                 {label}
-              </Link>
+              </a>
             )
           })}
           <div className="pt-4">
