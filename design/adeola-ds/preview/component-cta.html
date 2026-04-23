@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><style>
+  body { margin: 0; background: #0e2795; font-family: Helvetica, Arial, sans-serif; padding: 24px; }
+  .row { display: flex; flex-direction: column; gap: 20px; }
+  .item { display: flex; align-items: center; gap: 20px; }
+  .lbl { font-size: 10px; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); text-transform: uppercase; width: 80px; }
+
+  .cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #161616; border: 0.4px solid rgba(246,246,246,0.4);
+    border-radius: 9999px; padding: 6px 14px 6px 6px;
+    color: #fff; font-size: 0.875rem; cursor: pointer;
+    transition: opacity 0.2s;
+    text-decoration: none;
+  }
+  .cta:hover { opacity: 0.8; }
+  .cta-icon {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: #fff; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+</style></head>
+<body>
+<div class="row">
+  <div class="item">
+    <div class="lbl">Default</div>
+    <div class="cta">
+      <div class="cta-icon">
+        <svg width="8" height="9" viewBox="0 0 8 9" fill="none"><path d="M8 4.5L0 9L0 0L8 4.5Z" fill="#161616"/></svg>
+      </div>
+      EP OUT NOW
+    </div>
+  </div>
+  <div class="item">
+    <div class="lbl">Nav CTA</div>
+    <div class="cta">
+      <div class="cta-icon">
+        <svg width="8" height="9" viewBox="0 0 8 9" fill="none"><path d="M8 4.5L0 9L0 0L8 4.5Z" fill="#161616"/></svg>
+      </div>
+      Contact
+    </div>
+  </div>
+  <div class="item">
+    <div class="lbl">Tickets</div>
+    <div class="cta">
+      <div class="cta-icon">
+        <svg width="8" height="9" viewBox="0 0 8 9" fill="none"><path d="M8 4.5L0 9L0 0L8 4.5Z" fill="#161616"/></svg>
+      </div>
+      Tickets
+    </div>
+  </div>
+</div>
+</body></html>

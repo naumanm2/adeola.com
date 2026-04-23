@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><style>
+  body { margin: 0; background: #0e2795; font-family: Helvetica, Arial, sans-serif; padding: 0; overflow: hidden; }
+  .row { display: flex; gap: 0; height: 180px; }
+  .cell { position: relative; overflow: hidden; flex: 1; }
+  .cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .lbl { position: absolute; bottom: 6px; left: 8px; font-size: 9px; letter-spacing: 0.08em; color: rgba(255,255,255,0.6); text-transform: uppercase; background: rgba(14,39,149,0.6); padding: 2px 5px; }
+</style></head>
+<body>
+<div class="row">
+  <div class="cell" style="flex:1.4">
+    <img src="../assets/hero-image.png" alt="hero" style="mix-blend-mode:lighten">
+    <div class="lbl">Hero — mix-blend-lighten</div>
+  </div>
+  <div class="cell" style="flex:0.7">
+    <img src="../assets/profile-photo.jpg" alt="profile">
+    <div class="lbl">Profile</div>
+  </div>
+  <div class="cell" style="flex:1">
+    <img src="../assets/video-thumbnail.png" alt="video thumbnail">
+    <div class="lbl">Video / covers</div>
+  </div>
+</div>
+</body></html>

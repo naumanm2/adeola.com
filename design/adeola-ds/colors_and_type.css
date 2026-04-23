@@ -1,0 +1,187 @@
+/* ============================================================
+   ADEOLA DESIGN SYSTEM — Colors & Typography
+   Source: naumanm2/adeola.com (Next.js + Tailwind CSS 4)
+   ============================================================ */
+
+/* ── Base Color Tokens ────────────────────────────────────── */
+:root {
+  /* Core palette */
+  --color-brand-blue:       #0e2795;   /* primary background — deep cobalt blue */
+  --color-brand-dark-blue:  #002f6d;   /* darker blue, used in gradient text */
+  --color-brand-black:      #161616;   /* CTA button / near-black */
+  --color-white:            #ffffff;
+  --color-off-white:        #ededed;   /* dark-mode foreground */
+  --color-off-white-2:      #f6f6f6;   /* used in gradient overlays */
+
+  /* Accent gradients (as token descriptions — apply via CSS) */
+  --gradient-text-pink-blue: linear-gradient(180deg, #ffcee5 0%, #ffcee5 50%, #002f6d 100%);
+  --gradient-text-gold:      linear-gradient(207deg, rgb(255, 212, 133) 6%, rgb(249, 192, 88) 88%);
+  --gradient-text-fade:      linear-gradient(180deg, #f6f6f6 0%, rgba(246,246,246,0) 100%);
+  --gradient-reflection:     linear-gradient(to bottom, rgba(255,255,255,0) 13%, rgba(255,255,255,0.01) 81%);
+
+  /* Opacity-scaled white (Tailwind white/N pattern) */
+  --color-white-70:   rgba(255, 255, 255, 0.70);
+  --color-white-60:   rgba(255, 255, 255, 0.60);
+  --color-white-50:   rgba(255, 255, 255, 0.50);
+  --color-white-40:   rgba(255, 255, 255, 0.40);
+  --color-white-30:   rgba(255, 255, 255, 0.30);
+  --color-white-20:   rgba(255, 255, 255, 0.20);
+  --color-white-10:   rgba(255, 255, 255, 0.10);
+  --color-white-05:   rgba(255, 255, 255, 0.05);
+
+  /* Semantic tokens */
+  --background:       var(--color-brand-blue);
+  --foreground:       var(--color-white);
+  --foreground-muted: var(--color-white-60);
+  --foreground-dim:   var(--color-white-30);
+  --button-bg:        var(--color-brand-black);
+  --border-subtle:    rgba(246, 246, 246, 0.25);   /* --border in globals.css */
+  --border-muted:     var(--color-white-20);
+  --border-strong:    var(--color-white);
+}
+
+/* ── Typography ───────────────────────────────────────────── */
+:root {
+  /* Font families */
+  --font-sans:   "Helvetica Neue", Helvetica, Arial, sans-serif;   /* Figma uses Helvetica Neue explicitly */
+
+  /* Type scale — fluid heading (from globals.css) */
+  --text-h1:     clamp(2.3328rem, 1.7715rem + 2.8067vw, 3.9467rem);
+
+  /* Fixed scale */
+  --text-xs:     0.75rem;    /* 12px — copyright, labels */
+  --text-sm:     0.875rem;   /* 14px — nav links, meta */
+  --text-base:   1rem;       /* 16px — role labels, locations */
+  --text-lg:     1.125rem;   /* 18px — social links */
+  --text-xl:     1.25rem;    /* 20px — video title, h2 */
+  --text-2xl:    1.5rem;     /* 24px — explore label, h3 */
+  --text-3xl:    1.875rem;   /* 30px — show titles on mobile */
+  --text-4xl:    2.25rem;    /* 36px — section headers */
+  --text-5xl:    3rem;       /* 48px — VIDEOS label */
+
+  /* Giant display sizes (fluid) */
+  --text-display-sm:  clamp(4rem, 14vw, 12rem);   /* ADE reflection */
+  --text-display-lg:  clamp(5rem, 24vw, 22.3125rem); /* ADEOLA footer */
+  --text-display-xl:  clamp(5rem, 14vw, 12.5rem);    /* SHOWS hero */
+
+  /* Letter spacing */
+  --tracking-tighter:  -0.05em;
+  --tracking-tight:    -0.025em;
+  --tracking-normal:   0em;
+  --tracking-wide:     0.025em;
+  --tracking-wider:    0.05em;
+  --tracking-widest:   0.1em;
+
+  /* Line heights */
+  --leading-none:    1;
+  --leading-tight:   1.1;
+  --leading-snug:    1.375;
+  --leading-relaxed: 1.625;
+
+  /* Font weights */
+  --font-medium: 500;
+  --font-bold:   700;
+}
+
+/* ── Semantic Typography Roles ────────────────────────────── */
+/* Page-level heading (h1 tag) */
+h1 {
+  font-family: var(--font-sans);
+  font-size: var(--text-h1);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-none);
+  letter-spacing: var(--tracking-tight);
+  color: var(--foreground);
+}
+
+/* Section display labels (e.g. VIDEOS, SHOWS, UPCOMING) */
+.display-section {
+  font-family: var(--font-sans);
+  font-size: var(--text-5xl);
+  font-weight: var(--font-bold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--foreground);
+  line-height: var(--leading-none);
+}
+
+/* Large display (hero footers) */
+.display-giant {
+  font-family: var(--font-sans);
+  font-size: var(--text-display-lg);
+  font-weight: var(--font-bold);
+  letter-spacing: var(--tracking-tight);
+  line-height: 0.88;
+  text-transform: uppercase;
+}
+
+/* Role label (e.g. SINGER • SONGWRITER) */
+.label-role {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  letter-spacing: var(--tracking-tight);
+  color: var(--foreground-muted);
+  text-transform: uppercase;
+}
+
+/* Nav link */
+.nav-link {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--foreground-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-link:hover { color: var(--foreground); }
+
+/* Body text */
+.body-text {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-wide);
+  line-height: var(--leading-snug);
+  color: var(--foreground-muted);
+}
+
+/* Micro / copyright */
+.text-micro {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-widest);
+  color: var(--foreground);
+}
+
+/* Show row title */
+.show-title {
+  font-family: var(--font-sans);
+  font-size: clamp(1.875rem, 4vw, 2rem);
+  font-weight: var(--font-bold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+/* ── Spacing & Layout ─────────────────────────────────────── */
+:root {
+  --spacing-container-mobile: 1rem;    /* p-4 */
+  --spacing-container-desktop: 2rem;   /* p-8 */
+  --spacing-section-gap: 1.5rem;       /* gap-6 */
+  --spacing-item-gap: 0.75rem;         /* gap-3 */
+}
+
+/* ── Border & Radius ─────────────────────────────────────── */
+:root {
+  --radius-none:   0px;
+  --radius-pill:   9999px;   /* CTA button */
+  --radius-card:   0.75rem;  /* rounded-xl — about section card */
+  --border-width:  0.4px;    /* ultra-thin border on CTA */
+}
+
+/* ── Blend Modes & Effects ───────────────────────────────── */
+:root {
+  --blend-ghost:  lighten;   /* mix-blend-lighten on hero image */
+  --transition-fast: 200ms;
+  --transition-medium: 300ms;
+  --easing-default: ease;
+}

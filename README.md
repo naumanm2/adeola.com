@@ -1,38 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# adeola.com
 
-## Getting Started
+Portfolio site for London-based singer-songwriter **Adeola Ikuesan** — hero, shows, audio releases, music videos, and long-form bio, all backed by an embedded Sanity Studio.
 
-First, run the development server:
+## Tech stack
+
+- [Next.js 15](https://nextjs.org) — App Router, Turbopack in dev
+- [Sanity v3](https://www.sanity.io) — content management, embedded at `/studio`
+- [Tailwind CSS 4](https://tailwindcss.com)
+- TypeScript
+
+## Getting started
 
 ```bash
+npm install
+cp .env.example .env.local   # fill in the Sanity values
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Public site: <http://localhost:3000>
+- Sanity Studio: <http://localhost:3000/studio>
 
-Open [http://localhost:3000/studio/](http://localhost:3000/studio/) with your browser to edit the content in Sanity.
+### Required env vars
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Variable                        | Purpose                            |
+| ------------------------------- | ---------------------------------- |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Sanity project ID                  |
+| `NEXT_PUBLIC_SANITY_DATASET`    | Sanity dataset (e.g. `production`) |
+| `SANITY_API_READ_TOKEN`         | Read token for live queries        |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Scripts
 
-## Learn More
+| Command                | Description                        |
+| ---------------------- | ---------------------------------- |
+| `npm run dev`          | Dev server with Turbopack          |
+| `npm run build`        | Production build                   |
+| `npm run start`        | Serve the production build         |
+| `npm run lint`         | ESLint via `next lint`             |
+| `npm run typecheck`    | TypeScript type checking (no emit) |
+| `npm run format`       | Format all files with Prettier     |
+| `npm run format:check` | Verify formatting without writing  |
 
-To learn more about Next.js, take a look at the following resources:
+## Design system
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The visual language is defined in [`design/adeola-ds/`](./design/adeola-ds/). It contains the token CSS, a markdown design brief, and a reference UI kit covering every page. Colors, typography, gradients, and signature effects (reflections, `mix-blend-lighten` hero) all derive from it.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Content model
 
-## Deploy on Vercel
+Four Sanity document types drive the site:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `general` — site-wide settings: hero image, profile image, short/long intro, social links
+- `show` — live performances (title, date, location, tickets, live/past flag)
+- `audio` — tracks and releases with audio file + cover art
+- `video` — music videos and visuals linking to external URLs
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project structure
+
+```
+app/
+  components/        # Container, Nav, CTA
+  studio/            # Embedded Sanity Studio
+  (about|audio|shows|video)/
+  globals.css        # DS tokens + gradient utilities
+  layout.tsx
+  page.tsx           # Home
+sanity/              # Schemas, client, live-fetch config
+design/adeola-ds/    # Design system (README, tokens, UI kit, assets)
+```
+
+## Deploy
+
+Any Node-capable host works. [Vercel](https://vercel.com/new) is the simplest path given the Next.js stack — connect the repo, add the env vars above, and it deploys on push.
