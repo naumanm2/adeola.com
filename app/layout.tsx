@@ -17,9 +17,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`antialiased`}>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-black focus:px-4 focus:py-2 focus:text-sm focus:text-white focus:outline focus:outline-2 focus:outline-white"
+        >
+          Skip to content
+        </a>
         <Container>
           <Nav />
-          {children}
+          <main id="main-content">{children}</main>
         </Container>
         <SanityLive />
       </body>
