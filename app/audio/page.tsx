@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { sanityFetch } from '@/sanity/lib/live'
-import { urlFor } from '@/sanity/lib/image'
+import { urlFor, hasAsset } from '@/sanity/lib/image'
+import SiteFooter from '../components/site-footer'
 
 type Track = {
   _id: string
@@ -20,60 +21,93 @@ const AUDIO_QUERY = `*[_type == "audio"] | order(_createdAt desc){
 
 export default async function AudioPage() {
   const { data: tracks } = await sanityFetch({ query: AUDIO_QUERY })
+  const trackList: Track[] = tracks ?? []
 
   return (
-    <div className="pt-16 md:pt-24">
-      <h1>Audio</h1>
+    <div className="flex flex-col">
+      {/* Hero */}
+      <section className="pt-16 md:pt-24">
+        <div className="flex items-start gap-2 leading-none">
+          <p className="display-section">Audio</p>
+          <span className="text-gradient-gold text-lg md:text-2xl font-bold">
+            ({trackList.length})
+          </span>
+        </div>
+        <div className="relative mt-6 flex flex-col items-center overflow-hidden">
+          <span className="display-giant display-giant--xl whitespace-nowrap text-white">
+            AUDIO
+          </span>
+          <span
+            className="display-giant display-giant--xl reflect whitespace-nowrap"
+            aria-hidden="true"
+          >
+            AUDIO
+          </span>
+        </div>
+      </section>
 
-      {tracks && tracks.length > 0 ? (
-        <div className="mt-12 flex flex-col gap-10 md:max-w-3xl">
-          {tracks.map((track: Track) => (
-            <div
-              key={track._id}
-              className="flex flex-col gap-4 border-t border-white/10 pt-6 md:pt-8"
-            >
-              <div className="flex items-start gap-4 md:gap-6">
-                {track.coverImage ? (
-                  <div className="relative h-20 w-20 shrink-0 md:h-28 md:w-28 lg:h-32 lg:w-32">
-                    <Image
-                      src={urlFor(track.coverImage).width(400).url()}
-                      alt={track.coverImage.alt ?? track.title}
-                      fill
-                      sizes="(min-width: 1024px) 128px, (min-width: 768px) 112px, 80px"
-                      className="object-cover"
-                    />
+      {/* Tracks */}
+      <section className="mt-12 md:mt-20">
+        {trackList.length > 0 ? (
+          <div className="flex flex-col">
+            {trackList.map((track) => (
+              <article
+                key={track._id}
+                className="flex flex-col gap-5 border-t border-white/20 py-6 md:flex-row md:items-center md:gap-8 md:py-8"
+              >
+                <div className="flex items-center gap-5 md:gap-6 md:flex-1">
+                  {hasAsset(track.coverImage) ? (
+                    <div className="relative h-20 w-20 shrink-0 md:h-24 md:w-24 lg:h-28 lg:w-28">
+                      <Image
+                        src={urlFor(track.coverImage).width(400).url()}
+                        alt={track.coverImage.alt ?? track.title}
+                        fill
+                        sizes="(min-width: 1024px) 112px, (min-width: 768px) 96px, 80px"
+                        className="object-cover"
+                      />
+                    </div>
+                  ) : (
+                    <div className="h-20 w-20 shrink-0 bg-white/5 md:h-24 md:w-24 lg:h-28 lg:w-28" />
+                  )}
+                  <div className="flex flex-col gap-1">
+                    <p className="text-lg md:text-xl font-bold uppercase tracking-widest text-white">
+                      {track.title}
+                    </p>
+                    {track.subtitle && (
+                      <p className="text-sm tracking-wide text-white/60 md:text-base">
+                        {track.subtitle}
+                      </p>
+                    )}
                   </div>
-                ) : (
-                  <div className="h-20 w-20 shrink-0 bg-white/5 md:h-28 md:w-28 lg:h-32 lg:w-32" />
-                )}
-                <div className="flex flex-col gap-1 pt-1">
-                  <p className="text-base md:text-lg font-medium">
-                    {track.title}
-                  </p>
-                  {track.subtitle && (
-                    <p className="text-sm text-white/60">{track.subtitle}</p>
+                </div>
+
+                <div className="md:flex-1 md:max-w-md">
+                  {track.audio?.asset?.url ? (
+                    <div className="bg-white/5 p-2 rounded-full">
+                      <audio
+                        controls
+                        src={track.audio.asset.url}
+                        aria-label={`Play ${track.title}`}
+                        className="h-10 w-full"
+                      />
+                    </div>
+                  ) : (
+                    <p className="text-sm text-white/40">
+                      No audio file uploaded.
+                    </p>
                   )}
                 </div>
-              </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p className="border-t border-white/20 pt-5 text-sm text-white/60">
+            No tracks yet.
+          </p>
+        )}
+      </section>
 
-              {track.audio?.asset?.url ? (
-                <audio
-                  controls
-                  src={track.audio.asset.url}
-                  aria-label={`Play ${track.title}`}
-                  className="h-10 w-full opacity-80"
-                />
-              ) : (
-                <p className="text-sm text-white/60">No audio file uploaded.</p>
-              )}
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p className="mt-12 border-t border-white/10 pt-5 text-sm text-white/60">
-          No tracks yet.
-        </p>
-      )}
+      <SiteFooter wordmark="AUDIO" />
     </div>
   )
 }

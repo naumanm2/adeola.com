@@ -1,12 +1,14 @@
 import Image from 'next/image'
 import { PortableText } from '@portabletext/react'
 import { sanityFetch } from '@/sanity/lib/live'
-import { urlFor } from '@/sanity/lib/image'
+import { urlFor, hasAsset } from '@/sanity/lib/image'
+import SiteFooter from '../components/site-footer'
 
 const GENERAL_QUERY = `*[_type == "general"][0]{
   title,
   subtitle,
   mainImage,
+  introShort,
   introLong
 }`
 
@@ -29,14 +31,20 @@ const portableTextComponents = {
       <p className="mb-4 leading-relaxed text-white/80">{children}</p>
     ),
     h2: ({ children }: { children?: React.ReactNode }) => (
-      <h2 className="mt-10 mb-3 text-xl md:text-2xl font-medium">{children}</h2>
+      <h2 className="mt-10 mb-3 text-xl md:text-2xl font-medium text-white">
+        {children}
+      </h2>
     ),
     h3: ({ children }: { children?: React.ReactNode }) => (
-      <h3 className="mt-8 mb-2 text-lg md:text-xl font-medium">{children}</h3>
+      <h3 className="mt-8 mb-2 text-lg md:text-xl font-medium text-white">
+        {children}
+      </h3>
     ),
     blockquote: ({ children }: { children?: React.ReactNode }) => (
-      <blockquote className="my-6 border-l-2 border-white/20 pl-4 italic text-white/70">
-        {children}
+      <blockquote className="my-8 border-l-2 border-white/30 pl-5 italic">
+        <span className="text-gradient-pink-blue text-xl md:text-2xl font-medium leading-snug">
+          {children}
+        </span>
       </blockquote>
     ),
   },
@@ -70,40 +78,66 @@ export default async function AboutPage() {
   const { data: general } = await sanityFetch({ query: GENERAL_QUERY })
 
   return (
-    <div className="pt-16 md:pt-24">
-      <h1>About</h1>
-
-      <div className="mt-12 grid grid-cols-1 items-start gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] md:gap-12 lg:gap-16">
-        {/* Image */}
-        {general?.mainImage && (
-          <div className="relative aspect-[3/4] w-full max-w-md md:max-w-none">
-            <Image
-              src={urlFor(general.mainImage).width(900).url()}
-              alt={general.mainImage.alt ?? ''}
-              fill
-              sizes="(min-width: 768px) 40vw, 90vw"
-              className="object-cover"
-            />
+    <div className="flex flex-col">
+      {/* Hero */}
+      <section className="pt-16 md:pt-24">
+        <div className="flex items-end justify-between gap-4">
+          <p className="display-section">About</p>
+          <div className="label-role flex gap-3 pb-2 md:pb-4">
+            <span>SINGER</span>
+            <span aria-hidden="true">•</span>
+            <span>SONGWRITER</span>
           </div>
-        )}
-
-        {/* Text */}
-        <div className="md:max-w-prose">
-          {general?.title && (
-            <p className="mb-6 text-xs uppercase tracking-widest text-white/60">
-              {general.title}
-            </p>
-          )}
-          {general?.introLong ? (
-            <PortableText
-              value={general.introLong}
-              components={portableTextComponents}
-            />
-          ) : (
-            <p className="text-sm text-white/60">No bio yet.</p>
-          )}
         </div>
-      </div>
+        <div className="relative mt-6 flex flex-col items-center overflow-hidden">
+          <span className="display-giant display-giant--xl whitespace-nowrap text-white">
+            ABOUT
+          </span>
+          <span
+            className="display-giant display-giant--xl reflect whitespace-nowrap"
+            aria-hidden="true"
+          >
+            ABOUT
+          </span>
+        </div>
+      </section>
+
+      {/* Content */}
+      <section className="mt-12 md:mt-20">
+        <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] md:gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
+          {hasAsset(general?.mainImage) && (
+            <div className="relative aspect-[3/4] w-full max-w-md md:max-w-none md:sticky md:top-8">
+              <Image
+                src={urlFor(general.mainImage).width(1000).url()}
+                alt={general.mainImage.alt ?? ''}
+                fill
+                sizes="(min-width: 1024px) 40vw, (min-width: 768px) 40vw, 90vw"
+                className="object-cover mix-blend-lighten"
+              />
+            </div>
+          )}
+
+          <div>
+            {general?.title && (
+              <p className="label-role mb-6">{general.title}</p>
+            )}
+            {general?.introLong ? (
+              <PortableText
+                value={general.introLong}
+                components={portableTextComponents}
+              />
+            ) : general?.introShort ? (
+              <p className="body-text text-white/80 md:text-lg md:leading-relaxed">
+                {general.introShort}
+              </p>
+            ) : (
+              <p className="text-sm text-white/60">No bio yet.</p>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter wordmark="ADEOLA" />
     </div>
   )
 }

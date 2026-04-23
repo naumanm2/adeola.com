@@ -10,6 +10,16 @@
   --color-off-white: #ededed;
   --color-off-white-2: #f6f6f6;
 
+  /* Opacity-scaled white (Tailwind white/N pattern) */
+  --color-white-70: rgba(255, 255, 255, 0.7);
+  --color-white-60: rgba(255, 255, 255, 0.6);
+  --color-white-50: rgba(255, 255, 255, 0.5);
+  --color-white-40: rgba(255, 255, 255, 0.4);
+  --color-white-30: rgba(255, 255, 255, 0.3);
+  --color-white-20: rgba(255, 255, 255, 0.2);
+  --color-white-10: rgba(255, 255, 255, 0.1);
+  --color-white-05: rgba(255, 255, 255, 0.05);
+
   /* Accent gradients */
   --gradient-text-pink-blue: linear-gradient(
     180deg,
@@ -27,22 +37,34 @@
     #f6f6f6 0%,
     rgba(246, 246, 246, 0) 100%
   );
+  --gradient-reflection: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
 
   /* Semantic */
   --background: var(--color-brand-blue);
   --foreground: var(--color-white);
+  --foreground-muted: var(--color-white-60);
+  --foreground-dim: var(--color-white-30);
   --button: var(--color-brand-black);
   --border: rgba(246, 246, 246, 0.25);
+  --border-muted: var(--color-white-20);
+  --border-strong: var(--color-white);
+
+  /* Fluid display sizes */
+  --text-display-sm: clamp(4rem, 14vw, 12rem);
+  --text-display-lg: clamp(5rem, 24vw, 22.3125rem);
+  --text-display-xl: clamp(5rem, 14vw, 12.5rem);
 
   /* Layout */
   --container-max: 1440px;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: var(--color-brand-blue);
-    --foreground: var(--color-off-white);
-  }
+  /* Motion */
+  --transition-fast: 200ms;
+  --transition-medium: 300ms;
+  --easing-default: ease;
 }
 
 body {
@@ -68,7 +90,84 @@ h1 {
   }
 }
 
-/* Gradient text helper used across pages */
+/* ── Semantic typography ──────────────────────────────────── */
+/* VIDEOS / UPCOMING / PAST / AUDIO / ABOUT section labels */
+.display-section {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+@media (min-width: 768px) {
+  .display-section {
+    font-size: 3.75rem;
+  }
+}
+
+/* Giant hero / footer wordmarks — ADE, SHOWS, ADEOLA */
+.display-giant {
+  font-weight: 700;
+  font-size: var(--text-display-lg);
+  letter-spacing: -0.025em;
+  line-height: 0.88;
+  text-transform: uppercase;
+}
+.display-giant--sm {
+  font-size: var(--text-display-sm);
+}
+.display-giant--xl {
+  font-size: var(--text-display-xl);
+}
+
+/* SINGER • SONGWRITER role label */
+.label-role {
+  font-size: 1rem;
+  letter-spacing: -0.025em;
+  color: var(--foreground-muted);
+  text-transform: uppercase;
+}
+
+/* Show row title — fluid 1.875–2rem, widest tracking */
+.show-title {
+  font-size: clamp(1.875rem, 4vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+/* Body paragraph */
+.body-text {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  line-height: 1.5;
+  color: var(--foreground-muted);
+}
+
+/* Micro / copyright */
+.text-micro {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--foreground);
+}
+
+/* Nav link */
+.nav-link {
+  font-size: 0.875rem;
+  color: var(--foreground-muted);
+  text-decoration: none;
+  transition: color var(--transition-fast) var(--easing-default);
+}
+.nav-link:hover {
+  color: var(--foreground);
+}
+.nav-link--active {
+  color: var(--foreground);
+}
+
+/* ── Gradient text helpers ───────────────────────────────── */
 .text-gradient-pink-blue {
   background-image: var(--gradient-text-pink-blue);
   -webkit-background-clip: text;
@@ -86,4 +185,18 @@ h1 {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* ── Signature reflection ────────────────────────────────── */
+/* Apply to a flipped duplicate element underneath display type.
+   Pairs with .display-giant on ADE, SHOWS, ADEOLA wordmarks. */
+.reflect {
+  transform: scaleY(-1);
+  background-image: var(--gradient-reflection);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  pointer-events: none;
+  user-select: none;
+  margin-top: 2px;
 }
