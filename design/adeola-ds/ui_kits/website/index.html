@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adeola — Website UI Kit</title>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0e2795;
+      font-family: Helvetica, Arial, sans-serif;
+      color: #fff;
+      min-height: 100vh;
+    }
+    #root { min-height: 100vh; }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+
+<!-- Component files (plain JS — export to window) -->
+<script type="text/babel" src="Nav.jsx"></script>
+<script type="text/babel" src="HomePage.jsx"></script>
+<script type="text/babel" src="ShowsPage.jsx"></script>
+<script type="text/babel" src="AudioPage.jsx"></script>
+<script type="text/babel" src="VideoPage.jsx"></script>
+<script type="text/babel" src="AboutPage.jsx"></script>
+
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accentColor": "#ffcee5",
+  "showReflections": true
+}/*EDITMODE-END*/;
+
+function App() {
+  const [page, setPage] = React.useState(() => localStorage.getItem('adeola-page') || 'home');
+  const [tweaks, setTweaks] = React.useState(TWEAK_DEFAULTS);
+  const [tweakOpen, setTweakOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    localStorage.setItem('adeola-page', page);
+  }, [page]);
+
+  // Tweaks protocol
+  React.useEffect(() => {
+    const handler = (e) => {
+      if (e.data?.type === '__activate_edit_mode') setTweakOpen(true);
+      if (e.data?.type === '__deactivate_edit_mode') setTweakOpen(false);
+    };
+    window.addEventListener('message', handler);
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    return () => window.removeEventListener('message', handler);
+  }, []);
+
+  function setTweak(key, val) {
+    const next = { ...tweaks, [key]: val };
+    setTweaks(next);
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { [key]: val } }, '*');
+  }
+
+  const pages = { home: HomePage, shows: ShowsPage, audio: AudioPage, video: VideoPage, about: AboutPage };
+  const PageComponent = pages[page] || HomePage;
+
+  return React.createElement('div', { style: { minHeight: '100vh' } },
+    // Container
+    React.createElement('div', { style: { padding: '16px', width: '100%', maxWidth: 480, margin: '0 auto' } },
+      React.createElement(Nav, { onNavigate: setPage, current: page }),
+      React.createElement('div', { style: { marginTop: 0 } },
+        React.createElement(PageComponent, { onNavigate: setPage })
+      )
+    ),
+
+    // Tweaks panel
+    tweakOpen && React.createElement('div', {
+      style: {
+        position: 'fixed', bottom: 20, right: 20, background: '#161616',
+        border: '0.4px solid rgba(246,246,246,0.3)', borderRadius: 12,
+        padding: '16px 20px', display: 'flex', flexDirection: 'column', gap: 16,
+        zIndex: 9999, minWidth: 220, fontFamily: 'Helvetica, Arial, sans-serif',
+        fontSize: '0.8rem', color: '#fff',
+      }
+    },
+      React.createElement('div', { style: { fontWeight: 700, letterSpacing: '0.08em', fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)' } }, 'TWEAKS'),
+
+      // Page selector
+      React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: 6 } },
+        React.createElement('div', { style: { color: 'rgba(255,255,255,0.5)', fontSize: '0.7rem', letterSpacing: '0.06em' } }, 'PAGE'),
+        React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: 4 } },
+          ['home','shows','audio','video','about'].map(p =>
+            React.createElement('button', {
+              key: p, onClick: () => setPage(p),
+              style: { background: page === p ? 'rgba(255,255,255,0.12)' : 'none', border: '0.4px solid rgba(255,255,255,0.15)', borderRadius: 6, padding: '4px 10px', color: '#fff', cursor: 'pointer', fontFamily: 'inherit', fontSize: '0.8rem', textAlign: 'left', letterSpacing: '0.04em', textTransform: 'capitalize' }
+            }, p)
+          )
+        )
+      ),
+
+      // Accent colour
+      React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: 6 } },
+        React.createElement('div', { style: { color: 'rgba(255,255,255,0.5)', fontSize: '0.7rem', letterSpacing: '0.06em' } }, 'ACCENT COLOR'),
+        React.createElement('div', { style: { display: 'flex', gap: 8, alignItems: 'center' } },
+          React.createElement('input', { type: 'color', value: tweaks.accentColor, onChange: e => setTweak('accentColor', e.target.value), style: { width: 28, height: 28, border: 'none', borderRadius: 4, cursor: 'pointer', background: 'none', padding: 0 } }),
+          React.createElement('span', { style: { color: 'rgba(255,255,255,0.5)', fontSize: '0.75rem' } }, tweaks.accentColor)
+        )
+      ),
+
+      // Reflections toggle
+      React.createElement('div', { style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between' } },
+        React.createElement('div', { style: { color: 'rgba(255,255,255,0.5)', fontSize: '0.7rem', letterSpacing: '0.06em' } }, 'REFLECTIONS'),
+        React.createElement('button', {
+          onClick: () => setTweak('showReflections', !tweaks.showReflections),
+          style: { background: tweaks.showReflections ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.06)', border: '0.4px solid rgba(255,255,255,0.2)', borderRadius: 9999, padding: '3px 10px', color: '#fff', cursor: 'pointer', fontFamily: 'inherit', fontSize: '0.75rem' }
+        }, tweaks.showReflections ? 'ON' : 'OFF')
+      ),
+    )
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(React.createElement(App));
+</script>
+</body>
+</html>

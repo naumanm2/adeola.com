@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><style>
+  body { margin: 0; background: #0e2795; font-family: Helvetica, Arial, sans-serif; padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+  .label { font-size: 9px; letter-spacing: 0.1em; color: rgba(255,255,255,0.3); text-transform: uppercase; }
+  .reflect-wrap { position: relative; }
+  .real { font-weight: 700; font-size: clamp(4rem,14vw,7rem); line-height: 0.88; letter-spacing: -0.025em; color: #fff; }
+  .ghost {
+    font-weight: 700; font-size: clamp(4rem,14vw,7rem); line-height: 0.88;
+    letter-spacing: -0.025em;
+    transform: scaleY(-1);
+    display: block;
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    pointer-events: none; user-select: none;
+    margin-top: 2px;
+  }
+</style></head>
+<body>
+  <div class="label">Reflection Effect</div>
+  <div class="reflect-wrap">
+    <div class="real">ADEOLA</div>
+    <div class="ghost">ADEOLA</div>
+  </div>
+</body></html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><style>
+  body { margin: 0; background: #0e2795; font-family: Helvetica, Arial, sans-serif; padding: 20px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .section { display: flex; flex-direction: column; gap: 8px; }
+  .title { font-size: 9px; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); text-transform: uppercase; margin-bottom: 4px; }
+  .row { display: flex; align-items: center; gap: 8px; }
+  .bar { background: rgba(255,255,255,0.25); height: 8px; border-radius: 2px; }
+  .label { font-size: 10px; color: rgba(255,255,255,0.6); width: 64px; flex-shrink: 0; }
+  .val { font-size: 10px; color: rgba(255,255,255,0.4); }
+
+  .radius-demo { display: flex; gap: 10px; align-items: center; }
+  .rbox { width: 40px; height: 40px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; }
+  .rlabel { font-size: 9px; color: rgba(255,255,255,0.5); text-align: center; }
+</style></head>
+<body>
+<div class="grid">
+  <div class="section">
+    <div class="title">Spacing Scale</div>
+    <div class="row"><div class="label">gap-3 / 12px</div><div class="bar" style="width:12px"></div><div class="val">items</div></div>
+    <div class="row"><div class="label">gap-6 / 24px</div><div class="bar" style="width:24px"></div><div class="val">sections</div></div>
+    <div class="row"><div class="label">p-4 / 16px</div><div class="bar" style="width:16px"></div><div class="val">mobile pad</div></div>
+    <div class="row"><div class="label">p-8 / 32px</div><div class="bar" style="width:32px"></div><div class="val">desktop pad</div></div>
+    <div class="row"><div class="label">pt-16 / 64px</div><div class="bar" style="width:64px"></div><div class="val">page top</div></div>
+  </div>
+  <div class="section">
+    <div class="title">Border Radius</div>
+    <div class="radius-demo">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:4px">
+        <div class="rbox" style="border-radius:0"></div>
+        <div class="rlabel">none<br>images</div>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:4px">
+        <div class="rbox" style="border-radius:0.75rem"></div>
+        <div class="rlabel">xl / 12px<br>about card</div>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:4px">
+        <div class="rbox" style="border-radius:9999px; width:80px; height:32px"></div>
+        <div class="rlabel">pill<br>CTA button</div>
+      </div>
+    </div>
+    <div class="title" style="margin-top:8px">Border Widths</div>
+    <div class="row"><div class="label">0.4px ultra</div><div style="height:16px; width:60px; border-top: 0.4px solid rgba(255,255,255,0.4)"></div><div class="val">CTA border</div></div>
+    <div class="row"><div class="label">1px muted</div><div style="height:16px; width:60px; border-top: 1px solid rgba(255,255,255,0.2)"></div><div class="val">dividers</div></div>
+    <div class="row"><div class="label">1px strong</div><div style="height:16px; width:60px; border-top: 1px solid #fff"></div><div class="val">card border</div></div>
+  </div>
+</div>
+</body></html>
