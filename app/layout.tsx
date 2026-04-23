@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Container from './components/container'
 import Nav from './components/nav'
+import SmoothScroll from './components/smooth-scroll'
 import { SanityLive } from '@/sanity/lib/live'
 
 export const metadata: Metadata = {
@@ -23,6 +24,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <SmoothScroll />
         <Container>
           <Nav />
           <main id="main-content">{children}</main>

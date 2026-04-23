@@ -2,7 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { sanityFetch } from '@/sanity/lib/live'
 import { urlFor, hasAsset } from '@/sanity/lib/image'
-import SiteFooter from '../components/site-footer'
 
 type Video = {
   _id: string
@@ -80,15 +79,9 @@ function VideoCard({ video, featured }: { video: Video; featured?: boolean }) {
       </div>
 
       <div className="flex flex-col gap-1">
-        <p
-          className={`font-bold uppercase tracking-tight text-white ${
-            featured ? 'text-2xl md:text-3xl' : 'text-base md:text-lg'
-          }`}
-        >
-          {video.title}
-        </p>
+        <p className="show-title text-white">{video.title}</p>
         {video.subtitle && video.subtitle.length > 0 && (
-          <p className="text-sm tracking-wide text-white/60 md:text-base">
+          <p className="text-sm tracking-wide text-white/60">
             {video.subtitle.join(' · ')}
           </p>
         )}
@@ -102,14 +95,13 @@ function VideoCard({ video, featured }: { video: Video; featured?: boolean }) {
   )
 }
 
-export default async function VideoPage() {
+export default async function VideoSection() {
   const { data: videos } = await sanityFetch({ query: VIDEO_QUERY })
   const list: Video[] = videos ?? []
 
   const featured = list[0]
   const rest = list.slice(1)
 
-  // Group rest by year
   const groups = new Map<string, Video[]>()
   for (const v of rest) {
     const year = v.date ? String(new Date(v.date).getUTCFullYear()) : '—'
@@ -118,42 +110,24 @@ export default async function VideoPage() {
   }
 
   return (
-    <div className="flex flex-col">
-      {/* Hero */}
-      <section className="pt-16 md:pt-24">
-        <div className="flex items-start gap-2 leading-none">
-          <p className="display-section">Video</p>
-          <span className="text-gradient-gold text-lg md:text-2xl font-bold">
-            ({list.length})
-          </span>
-        </div>
-        <div className="relative mt-6 flex flex-col items-center overflow-hidden">
-          <span className="display-giant display-giant--xl whitespace-nowrap text-white">
-            VIDEO
-          </span>
-          <span
-            className="display-giant display-giant--xl reflect whitespace-nowrap"
-            aria-hidden="true"
-          >
-            VIDEO
-          </span>
-        </div>
-      </section>
+    <section id="video" className="scroll-mt-24">
+      <div className="flex items-baseline gap-2">
+        <p className="display-section">Video</p>
+        <span className="text-gradient-gold text-sm md:text-base font-bold">
+          ({list.length})
+        </span>
+      </div>
 
       {list.length > 0 ? (
-        <>
-          {featured && (
-            <section className="mt-12 md:mt-20">
-              <VideoCard video={featured} featured />
-            </section>
-          )}
+        <div className="mt-6 md:mt-8 flex flex-col gap-12 md:gap-16">
+          {featured && <VideoCard video={featured} featured />}
 
           {rest.length > 0 && (
-            <section className="mt-16 md:mt-24 flex flex-col gap-12 md:gap-16">
+            <div className="flex flex-col gap-12 md:gap-16">
               {Array.from(groups.entries()).map(([year, items]) => (
                 <div key={year} className="flex flex-col gap-6 md:gap-8">
                   <div className="flex items-baseline gap-3 border-b border-white/20 pb-3">
-                    <p className="text-2xl md:text-3xl font-bold tracking-widest text-white">
+                    <p className="text-base font-bold tracking-widest text-white">
                       {year}
                     </p>
                     <span className="text-sm text-white/40 tracking-widest">
@@ -167,16 +141,14 @@ export default async function VideoPage() {
                   </div>
                 </div>
               ))}
-            </section>
+            </div>
           )}
-        </>
+        </div>
       ) : (
-        <p className="mt-12 border-t border-white/20 pt-5 text-sm text-white/60">
+        <p className="mt-6 border-t border-white/20 pt-5 text-sm text-white/60">
           No videos yet.
         </p>
       )}
-
-      <SiteFooter wordmark="VIDEO" />
-    </div>
+    </section>
   )
 }
