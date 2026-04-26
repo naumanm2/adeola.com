@@ -26,7 +26,7 @@ export default async function VideoSection() {
   const rest = list.slice(1)
 
   return (
-    <section id="video" className="scroll-mt-24 pt-10 pb-[60px]">
+    <section id="video" className="scroll-mt-24 pt-10 pb-[30px]">
       <div style={{ marginBottom: 20 }}>
         <div
           style={{
@@ -45,17 +45,14 @@ export default async function VideoSection() {
           >
             VIDEOS
           </div>
-          <span
-            style={{
-              fontSize: '0.75rem',
-              letterSpacing: '0.2em',
-              color: 'rgba(255,255,255,0.6)',
-            }}
-          >
-            ALL VIDEOS →
-          </span>
         </div>
-        <div style={{ height: '1.25rem', overflow: 'hidden' }}>
+        <div
+          style={{
+            height: '1.25rem',
+            overflow: 'hidden',
+            marginTop: '-0.22em',
+          }}
+        >
           <span
             aria-hidden="true"
             style={{
@@ -67,7 +64,7 @@ export default async function VideoSection() {
               color: 'transparent',
               userSelect: 'none',
               pointerEvents: 'none',
-              marginTop: 1,
+              marginTop: '-0.22em',
               transform: 'scaleY(-1)',
               backgroundImage:
                 'linear-gradient(to top, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 50%)',

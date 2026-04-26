@@ -64,7 +64,7 @@ export default async function Home() {
 
       {/* Bio quote */}
       {general?.introShort && (
-        <section className="pt-5 pb-[60px]">
+        <section className="pt-5 pb-[30px]">
           <p
             className="text-gradient-pink-blue m-0"
             style={{

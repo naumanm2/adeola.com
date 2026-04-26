@@ -9,7 +9,7 @@ export default async function AboutSection() {
   const { data: general } = await sanityFetch({ query: GENERAL_QUERY })
 
   return (
-    <section id="about" className="scroll-mt-24 pt-10 pb-[60px]">
+    <section id="about" className="scroll-mt-24 pt-10 pb-[30px]">
       <div
         style={{
           border: '1px solid rgba(255,255,255,0.7)',

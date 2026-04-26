@@ -74,6 +74,11 @@ body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+::selection {
+  background-color: #ffcee5;
+  color: #0e2795;
+}
+
 h1 {
   font-size: clamp(3.2rem, 11vw, 7.5rem);
   line-height: 0.92;

@@ -1,4 +1,5 @@
 import { sanityFetch } from '@/sanity/lib/live'
+import CTA from '../cta'
 
 type Ticket = { venue: string; url: string }
 
@@ -33,7 +34,7 @@ export default async function ShowsSection() {
   const upcoming: Show[] = (shows ?? []).filter((s: Show) => s.live)
 
   return (
-    <section id="shows" className="scroll-mt-24 pt-10 pb-[60px]">
+    <section id="shows" className="scroll-mt-24 pt-10 pb-[30px]">
       <div style={{ marginBottom: 20 }}>
         <div
           style={{
@@ -52,17 +53,14 @@ export default async function ShowsSection() {
           >
             SHOWS
           </div>
-          <span
-            style={{
-              fontSize: '0.75rem',
-              letterSpacing: '0.2em',
-              color: 'rgba(255,255,255,0.6)',
-            }}
-          >
-            ALL SHOWS →
-          </span>
         </div>
-        <div style={{ height: '1.25rem', overflow: 'hidden' }}>
+        <div
+          style={{
+            height: '1.25rem',
+            overflow: 'hidden',
+            marginTop: '-0.22em',
+          }}
+        >
           <span
             aria-hidden="true"
             style={{
@@ -74,7 +72,7 @@ export default async function ShowsSection() {
               color: 'transparent',
               userSelect: 'none',
               pointerEvents: 'none',
-              marginTop: 1,
+              marginTop: '-0.22em',
               transform: 'scaleY(-1)',
               backgroundImage:
                 'linear-gradient(to top, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 50%)',
@@ -168,20 +166,7 @@ export default async function ShowsSection() {
 
                 {/* Tickets */}
                 {ticketUrl ? (
-                  <a
-                    href={ticketUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="transition-colors duration-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
-                    style={{
-                      fontSize: '0.75rem',
-                      letterSpacing: '0.2em',
-                      color: 'rgba(255,255,255,0.7)',
-                      textDecoration: 'none',
-                    }}
-                  >
-                    TICKETS →
-                  </a>
+                  <CTA link={ticketUrl} text="Tickets" external />
                 ) : (
                   <div />
                 )}
