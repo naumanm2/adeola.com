@@ -40,7 +40,7 @@ export default async function AudioSection() {
   if (!track) return null
 
   return (
-    <section id="music" className="scroll-mt-24 pt-10 pb-[60px]">
+    <section id="music" className="scroll-mt-24 pt-10 pb-[30px]">
       <div
         style={{
           display: 'flex',

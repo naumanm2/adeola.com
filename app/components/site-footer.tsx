@@ -89,7 +89,13 @@ export default async function SiteFooter() {
           >
             NEWSLETTER
           </div>
-          <div style={{ height: '1.25rem', overflow: 'hidden' }}>
+          <div
+            style={{
+              height: '1.25rem',
+              overflow: 'hidden',
+              marginTop: '-0.22em',
+            }}
+          >
             <span
               aria-hidden="true"
               style={{
@@ -101,7 +107,7 @@ export default async function SiteFooter() {
                 color: 'transparent',
                 userSelect: 'none',
                 pointerEvents: 'none',
-                marginTop: 1,
+                marginTop: '-0.22em',
                 transform: 'scaleY(-1)',
                 backgroundImage:
                   'linear-gradient(to top, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 50%)',
@@ -115,34 +121,21 @@ export default async function SiteFooter() {
         </div>
         <div
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: 36,
-            alignItems: 'start',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 24,
+            alignItems: 'stretch',
           }}
         >
-          <div>
-            <div
-              style={{
-                fontSize: 'clamp(1.3rem, 3vw, 1.8rem)',
-                fontWeight: 500,
-                letterSpacing: '-0.01em',
-                lineHeight: 1.1,
-                marginBottom: 10,
-              }}
-            >
-              Letters from the studio.
-            </div>
-            <div
-              style={{
-                fontSize: '0.85rem',
-                color: 'rgba(255,255,255,0.6)',
-                lineHeight: 1.5,
-                maxWidth: 360,
-              }}
-            >
-              Mostly quiet. A handful of times a year.
-            </div>
+          <div
+            style={{
+              fontSize: 'clamp(1.3rem, 3vw, 1.8rem)',
+              fontWeight: 500,
+              letterSpacing: '-0.01em',
+              lineHeight: 1.1,
+            }}
+          >
+            Letters from the studio.
           </div>
           <NewsletterForm />
         </div>
@@ -224,6 +217,7 @@ export default async function SiteFooter() {
             textAlign: 'center',
             height: 'clamp(3rem, 10vw, 8rem)',
             overflow: 'hidden',
+            marginTop: '-0.18em',
           }}
         >
           <span
@@ -237,7 +231,7 @@ export default async function SiteFooter() {
               color: 'transparent',
               userSelect: 'none',
               pointerEvents: 'none',
-              marginTop: 2,
+              marginTop: '-0.18em',
               transform: 'scaleY(-1)',
               backgroundImage:
                 'linear-gradient(to top, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 50%)',
