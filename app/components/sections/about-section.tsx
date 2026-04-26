@@ -1,116 +1,48 @@
-import Image from 'next/image'
-import { PortableText } from '@portabletext/react'
 import { sanityFetch } from '@/sanity/lib/live'
-import { urlFor, hasAsset } from '@/sanity/lib/image'
+import CTA from '../cta'
 
 const GENERAL_QUERY = `*[_type == "general"][0]{
-  title,
-  subtitle,
-  mainImage,
-  introShort,
-  introLong
+  introShort
 }`
-
-const portableTextComponents = {
-  types: {
-    image: ({ value }: { value: { asset: object; alt?: string } }) => (
-      <div className="relative my-8 aspect-[4/3] w-full">
-        <Image
-          src={urlFor(value).width(1200).url()}
-          alt={value.alt ?? ''}
-          fill
-          sizes="(min-width: 768px) 50vw, 100vw"
-          className="object-cover"
-        />
-      </div>
-    ),
-  },
-  block: {
-    normal: ({ children }: { children?: React.ReactNode }) => (
-      <p className="mb-4 leading-relaxed text-white/80">{children}</p>
-    ),
-    h2: ({ children }: { children?: React.ReactNode }) => (
-      <h2 className="mt-10 mb-3 text-xl md:text-2xl font-medium text-white">
-        {children}
-      </h2>
-    ),
-    h3: ({ children }: { children?: React.ReactNode }) => (
-      <h3 className="mt-8 mb-2 text-lg md:text-xl font-medium text-white">
-        {children}
-      </h3>
-    ),
-    blockquote: ({ children }: { children?: React.ReactNode }) => (
-      <blockquote className="my-8 border-l-2 border-white/30 pl-5 italic">
-        <span className="text-gradient-pink-blue text-xl md:text-2xl font-medium leading-snug">
-          {children}
-        </span>
-      </blockquote>
-    ),
-  },
-  marks: {
-    strong: ({ children }: { children?: React.ReactNode }) => (
-      <strong className="font-medium text-white">{children}</strong>
-    ),
-    em: ({ children }: { children?: React.ReactNode }) => (
-      <em className="italic">{children}</em>
-    ),
-    link: ({
-      value,
-      children,
-    }: {
-      value?: { href: string }
-      children?: React.ReactNode
-    }) => (
-      <a
-        href={value?.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="rounded-sm text-white underline underline-offset-4 transition-colors hover:text-white/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
-      >
-        {children}
-      </a>
-    ),
-  },
-}
 
 export default async function AboutSection() {
   const { data: general } = await sanityFetch({ query: GENERAL_QUERY })
 
   return (
-    <section id="about" className="scroll-mt-24">
-      <div className="flex items-baseline gap-2">
-        <p className="display-section">About</p>
-      </div>
-
-      <div className="mt-6 md:mt-8 grid grid-cols-1 items-start gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] md:gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
-        {hasAsset(general?.mainImage) && (
-          <div className="relative aspect-[3/4] w-full max-w-md md:max-w-none md:sticky md:top-8">
-            <Image
-              src={urlFor(general.mainImage).width(1000).url()}
-              alt={general.mainImage.alt ?? ''}
-              fill
-              sizes="(min-width: 1024px) 40vw, (min-width: 768px) 40vw, 90vw"
-              className="object-cover mix-blend-lighten"
-            />
-          </div>
-        )}
-
+    <section id="about" className="scroll-mt-24 pt-10 pb-[60px]">
+      <div
+        style={{
+          border: '1px solid rgba(255,255,255,0.7)',
+          borderRadius: 12,
+          padding: 'clamp(20px, 4vw, 36px)',
+          display: 'grid',
+          gap: 18,
+        }}
+      >
+        <div
+          style={{
+            fontWeight: 700,
+            fontSize: 'clamp(1.4rem, 3vw, 2rem)',
+            letterSpacing: '0.1em',
+          }}
+        >
+          ABOUT
+        </div>
+        <p
+          style={{
+            fontSize: '1rem',
+            fontWeight: 500,
+            letterSpacing: '0.005em',
+            lineHeight: 1.55,
+            margin: 0,
+            color: 'rgba(255,255,255,0.82)',
+            maxWidth: 720,
+          }}
+        >
+          {general?.introShort ?? ''}
+        </p>
         <div>
-          {general?.title && (
-            <p className="label-role mb-6">{general.title}</p>
-          )}
-          {general?.introLong ? (
-            <PortableText
-              value={general.introLong}
-              components={portableTextComponents}
-            />
-          ) : general?.introShort ? (
-            <p className="body-text text-white/80 md:text-lg md:leading-relaxed">
-              {general.introShort}
-            </p>
-          ) : (
-            <p className="text-sm text-white/60">No bio yet.</p>
-          )}
+          <CTA link="#about" text="Read full bio" />
         </div>
       </div>
     </section>

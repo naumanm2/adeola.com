@@ -1,22 +1,23 @@
 'use client'
 
-import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import CTA from './cta'
+import ContactModal from './contact-modal'
 
 const links = [
+  { id: 'music', label: 'Music' },
   { id: 'shows', label: 'Shows' },
-  { id: 'audio', label: 'Audio' },
-  { id: 'video', label: 'Video' },
+  { id: 'video', label: 'Videos' },
   { id: 'about', label: 'About' },
+  { id: 'newsletter', label: 'Newsletter' },
 ]
 
 export default function Nav() {
   const [open, setOpen] = useState(false)
   const [activeId, setActiveId] = useState<string | null>(null)
+  const [contactOpen, setContactOpen] = useState(false)
   const drawerRef = useRef<HTMLDivElement>(null)
 
-  // Scroll-spy: track which section is most in view
   useEffect(() => {
     const sections = links
       .map(({ id }) => document.getElementById(id))
@@ -36,7 +37,6 @@ export default function Nav() {
     return () => observer.disconnect()
   }, [])
 
-  // Drawer keyboard handling + body scroll lock
   useEffect(() => {
     if (!open) return
     const onKey = (e: KeyboardEvent) => {
@@ -70,69 +70,66 @@ export default function Nav() {
   }, [open])
 
   return (
-    <nav
-      aria-label="Primary"
-      className="flex w-full items-center justify-between"
-    >
-      <Link
-        href="/"
-        className="font-bold tracking-wider text-white text-base md:text-lg rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+    <>
+      <nav
+        aria-label="Primary"
+        className="flex w-full items-center justify-between py-[22px]"
       >
-        ADEOLA
-      </Link>
+        <div aria-hidden="true" />
 
-      {/* Desktop links */}
-      <div className="hidden items-center gap-6 md:flex">
-        {links.map(({ id, label }) => {
-          const active = activeId === id
-          return (
-            <a
-              key={id}
-              href={`/#${id}`}
-              aria-current={active ? 'true' : undefined}
-              className={`nav-link rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0e2795] ${
-                active ? 'nav-link--active border-b border-white pb-0.5' : ''
+        {/* Desktop links */}
+        <div className="hidden items-center gap-7 md:flex">
+          {links.map(({ id, label }) => {
+            const active = activeId === id
+            return (
+              <a
+                key={id}
+                href={`/#${id}`}
+                aria-current={active ? 'true' : undefined}
+                className={`nav-link rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0e2795] ${
+                  active ? 'nav-link--active border-b border-white pb-0.5' : ''
+                }`}
+              >
+                {label}
+              </a>
+            )
+          })}
+          <CTA text="Contact" onClick={() => setContactOpen(true)} />
+        </div>
+
+        {/* Mobile hamburger */}
+        <button
+          type="button"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          aria-controls="mobile-nav"
+          onClick={() => setOpen((v) => !v)}
+          className="relative z-50 flex h-11 w-11 items-center justify-center rounded-full text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white md:hidden"
+        >
+          <span className="relative block h-4 w-6">
+            <span
+              className={`absolute left-0 top-0 block h-0.5 w-6 bg-white transition-transform duration-200 ${
+                open ? 'translate-y-[7px] rotate-45' : ''
               }`}
-            >
-              {label}
-            </a>
-          )
-        })}
-        <CTA link="mailto:hello@adeola.com" text="Contact" />
-      </div>
-
-      {/* Mobile hamburger toggle */}
-      <button
-        type="button"
-        aria-label={open ? 'Close menu' : 'Open menu'}
-        aria-expanded={open}
-        aria-controls="mobile-nav"
-        onClick={() => setOpen((v) => !v)}
-        className="md:hidden relative z-50 flex h-11 w-11 items-center justify-center rounded-full text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-      >
-        <span className="relative block h-4 w-6">
-          <span
-            className={`absolute left-0 top-0 block h-0.5 w-6 bg-white transition-transform duration-200 ${
-              open ? 'translate-y-[7px] rotate-45' : ''
-            }`}
-          />
-          <span
-            className={`absolute left-0 top-[7px] block h-0.5 w-6 bg-white transition-opacity duration-200 ${
-              open ? 'opacity-0' : 'opacity-100'
-            }`}
-          />
-          <span
-            className={`absolute left-0 top-[14px] block h-0.5 w-6 bg-white transition-transform duration-200 ${
-              open ? '-translate-y-[7px] -rotate-45' : ''
-            }`}
-          />
-        </span>
-      </button>
+            />
+            <span
+              className={`absolute left-0 top-[7px] block h-0.5 w-6 bg-white transition-opacity duration-200 ${
+                open ? 'opacity-0' : 'opacity-100'
+              }`}
+            />
+            <span
+              className={`absolute left-0 top-[14px] block h-0.5 w-6 bg-white transition-transform duration-200 ${
+                open ? '-translate-y-[7px] -rotate-45' : ''
+              }`}
+            />
+          </span>
+        </button>
+      </nav>
 
       {/* Mobile drawer */}
       <div
         id="mobile-nav"
-        className={`fixed inset-0 z-40 md:hidden transition-opacity duration-200 ${
+        className={`fixed inset-0 z-40 transition-opacity duration-200 md:hidden ${
           open ? 'opacity-100' : 'pointer-events-none opacity-0'
         }`}
         aria-hidden={!open}
@@ -155,7 +152,7 @@ export default function Nav() {
                 href={`/#${id}`}
                 onClick={() => setOpen(false)}
                 aria-current={active ? 'true' : undefined}
-                className={`text-3xl sm:text-4xl font-bold uppercase tracking-widest rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white ${
+                className={`rounded-sm text-3xl font-bold uppercase tracking-widest focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:text-4xl ${
                   active ? 'text-white' : 'text-white/60'
                 }`}
               >
@@ -164,10 +161,18 @@ export default function Nav() {
             )
           })}
           <div className="pt-4">
-            <CTA link="mailto:hello@adeola.com" text="Contact" />
+            <CTA
+              text="Contact"
+              onClick={() => {
+                setOpen(false)
+                setContactOpen(true)
+              }}
+            />
           </div>
         </div>
       </div>
-    </nav>
+
+      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
+    </>
   )
 }
