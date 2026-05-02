@@ -17,6 +17,7 @@ export default function Nav() {
   const [activeId, setActiveId] = useState<string | null>(null)
   const [contactOpen, setContactOpen] = useState(false)
   const drawerRef = useRef<HTMLDivElement>(null)
+  const contactTriggerRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     const sections = links
@@ -94,7 +95,13 @@ export default function Nav() {
               </a>
             )
           })}
-          <CTA text="Contact" onClick={() => setContactOpen(true)} />
+          <CTA
+            text="Contact"
+            onClick={() => {
+              contactTriggerRef.current = document.activeElement as HTMLElement
+              setContactOpen(true)
+            }}
+          />
         </div>
 
         {/* Mobile hamburger */}
@@ -164,6 +171,7 @@ export default function Nav() {
             <CTA
               text="Contact"
               onClick={() => {
+                contactTriggerRef.current = document.activeElement as HTMLElement
                 setOpen(false)
                 setContactOpen(true)
               }}
@@ -172,7 +180,11 @@ export default function Nav() {
         </div>
       </div>
 
-      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
+      <ContactModal
+        open={contactOpen}
+        onClose={() => setContactOpen(false)}
+        triggerRef={contactTriggerRef}
+      />
     </>
   )
 }

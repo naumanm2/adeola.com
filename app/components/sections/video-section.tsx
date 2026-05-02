@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { sanityFetch } from '@/sanity/lib/live'
 import { urlFor, hasAsset } from '@/sanity/lib/image'
+import Reflection from '../reflection'
 
 type Video = {
   _id: string
@@ -35,7 +36,7 @@ export default async function VideoSection() {
             alignItems: 'baseline',
           }}
         >
-          <div
+          <h2
             style={{
               fontWeight: 700,
               fontSize: 'clamp(2rem, 5vw, 3rem)',
@@ -44,37 +45,11 @@ export default async function VideoSection() {
             }}
           >
             VIDEOS
-          </div>
+          </h2>
         </div>
-        <div
-          style={{
-            height: '1.25rem',
-            overflow: 'hidden',
-            marginTop: '-0.22em',
-          }}
-        >
-          <span
-            aria-hidden="true"
-            style={{
-              display: 'block',
-              fontWeight: 700,
-              fontSize: 'clamp(2rem, 5vw, 3rem)',
-              letterSpacing: '0.1em',
-              lineHeight: 1,
-              color: 'transparent',
-              userSelect: 'none',
-              pointerEvents: 'none',
-              marginTop: '-0.22em',
-              transform: 'scaleY(-1)',
-              backgroundImage:
-                'linear-gradient(to top, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 50%)',
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-            }}
-          >
-            VIDEOS
-          </span>
-        </div>
+        <Reflection style={{ fontWeight: 700, fontSize: 'clamp(2rem, 5vw, 3rem)', letterSpacing: '0.1em', lineHeight: 1 }}>
+          VIDEOS
+        </Reflection>
       </div>
 
       {list.length === 0 ? (
@@ -131,8 +106,7 @@ export default async function VideoSection() {
                       width: 68,
                       height: 68,
                       borderRadius: '50%',
-                      background: 'rgba(255,255,255,0.16)',
-                      backdropFilter: 'blur(6px)',
+                      background: 'rgba(255,255,255,0.18)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',

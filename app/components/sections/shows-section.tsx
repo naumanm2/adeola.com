@@ -1,5 +1,6 @@
 import { sanityFetch } from '@/sanity/lib/live'
 import CTA from '../cta'
+import Reflection from '../reflection'
 
 type Ticket = { venue: string; url: string }
 
@@ -43,7 +44,7 @@ export default async function ShowsSection() {
             alignItems: 'baseline',
           }}
         >
-          <div
+          <h2
             style={{
               fontWeight: 700,
               fontSize: 'clamp(2rem, 5vw, 3rem)',
@@ -52,37 +53,11 @@ export default async function ShowsSection() {
             }}
           >
             SHOWS
-          </div>
+          </h2>
         </div>
-        <div
-          style={{
-            height: '1.25rem',
-            overflow: 'hidden',
-            marginTop: '-0.22em',
-          }}
-        >
-          <span
-            aria-hidden="true"
-            style={{
-              display: 'block',
-              fontWeight: 700,
-              fontSize: 'clamp(2rem, 5vw, 3rem)',
-              letterSpacing: '0.1em',
-              lineHeight: 1,
-              color: 'transparent',
-              userSelect: 'none',
-              pointerEvents: 'none',
-              marginTop: '-0.22em',
-              transform: 'scaleY(-1)',
-              backgroundImage:
-                'linear-gradient(to top, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 50%)',
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-            }}
-          >
-            SHOWS
-          </span>
-        </div>
+        <Reflection style={{ fontWeight: 700, fontSize: 'clamp(2rem, 5vw, 3rem)', letterSpacing: '0.1em', lineHeight: 1 }}>
+          SHOWS
+        </Reflection>
       </div>
 
       <div
@@ -146,13 +121,16 @@ export default async function ShowsSection() {
                 </div>
 
                 {/* City + venue */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 2, minWidth: 0 }}>
                   <div
                     style={{
                       fontWeight: 700,
                       letterSpacing: '0.08em',
                       fontSize: 'clamp(1rem, 2vw, 1.15rem)',
                       textTransform: 'uppercase',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
                     }}
                   >
                     {show.title}

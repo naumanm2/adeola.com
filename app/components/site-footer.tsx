@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { sanityFetch } from '@/sanity/lib/live'
 import NewsletterForm from './newsletter-form'
+import Reflection from './reflection'
 
 type Social = { social: string; url: string }
 type General = { socials?: Social[] }
@@ -79,7 +80,7 @@ export default async function SiteFooter() {
         }}
       >
         <div>
-          <div
+          <h2
             style={{
               fontWeight: 700,
               fontSize: 'clamp(2rem, 5vw, 3rem)',
@@ -88,36 +89,10 @@ export default async function SiteFooter() {
             }}
           >
             NEWSLETTER
-          </div>
-          <div
-            style={{
-              height: '1.25rem',
-              overflow: 'hidden',
-              marginTop: '-0.22em',
-            }}
-          >
-            <span
-              aria-hidden="true"
-              style={{
-                display: 'block',
-                fontWeight: 700,
-                fontSize: 'clamp(2rem, 5vw, 3rem)',
-                letterSpacing: '0.1em',
-                lineHeight: 1,
-                color: 'transparent',
-                userSelect: 'none',
-                pointerEvents: 'none',
-                marginTop: '-0.22em',
-                transform: 'scaleY(-1)',
-                backgroundImage:
-                  'linear-gradient(to top, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 50%)',
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-              }}
-            >
-              NEWSLETTER
-            </span>
-          </div>
+          </h2>
+          <Reflection style={{ fontWeight: 700, fontSize: 'clamp(2rem, 5vw, 3rem)', letterSpacing: '0.1em', lineHeight: 1 }}>
+            NEWSLETTER
+          </Reflection>
         </div>
         <div
           style={{
@@ -163,7 +138,7 @@ export default async function SiteFooter() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.social}
-                className="flex items-center justify-center text-white transition-colors duration-200 hover:text-white/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+                className="flex items-center justify-center text-white transition-colors duration-200 hover:text-white/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
                 style={{ width: 52, height: 52 }}
               >
                 {icon ? (
