@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-02T00:00:00Z",
+  "title": "Design System: Adeola",
+  "extensions": {
+    "colorMeta": {
+      "cobalt": {
+        "role": "primary",
+        "displayName": "Deep Cobalt",
+        "canonical": "oklch(27% 0.22 264)",
+        "tonalRamp": ["#050d3d", "#091a6b", "#0e2795", "#1e42c0", "#3d60d8", "#6884e8", "#a0aef2", "#d0d5f8"]
+      },
+      "cobalt-deep": {
+        "role": "primary",
+        "displayName": "Cobalt Deep",
+        "canonical": "oklch(20% 0.18 264)",
+        "tonalRamp": ["#00071a", "#001038", "#002f6d", "#0046a4", "#1460c8", "#4882dc", "#8caaec", "#ccd6f8"]
+      },
+      "near-black": {
+        "role": "neutral",
+        "displayName": "Near-Black",
+        "canonical": "oklch(13% 0.00 0)",
+        "tonalRamp": ["#080808", "#161616", "#282828", "#3c3c3c", "#5a5a5a", "#808080", "#b4b4b4", "#e8e8e8"]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "Pure White",
+        "canonical": "oklch(100% 0.00 0)",
+        "tonalRamp": ["#1a1a1a", "#363636", "#5c5c5c", "#848484", "#adadad", "#cfcfcf", "#ebebeb", "#ffffff"]
+      },
+      "off-white": {
+        "role": "neutral",
+        "displayName": "Off-White",
+        "canonical": "oklch(96% 0.005 60)",
+        "tonalRamp": ["#3d3c38", "#6a6860", "#919080", "#b8b6a8", "#d4d2ca", "#e8e6e0", "#f2f0ec", "#f6f6f4"]
+      },
+      "blush": {
+        "role": "secondary",
+        "displayName": "Blush",
+        "canonical": "oklch(88% 0.07 0)",
+        "tonalRamp": ["#6b1535", "#a0294d", "#d44d6e", "#e8738d", "#f4a8bc", "#ffcee5", "#ffe0ed", "#fff0f5"]
+      },
+      "gold-warm": {
+        "role": "tertiary",
+        "displayName": "Gold Warm",
+        "canonical": "oklch(88% 0.13 75)",
+        "tonalRamp": ["#3d2200", "#7a4600", "#b46800", "#d98f00", "#f0b830", "#ffd485", "#ffe8b0", "#fff6e0"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display Wordmark",
+        "purpose": "The ADEOLA footer wordmark only. One instance per page. Always paired with the Reflection effect."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "The artist name <h1>. One per page. Tight negative tracking. Always uppercase."
+      },
+      "title": {
+        "displayName": "Section Title",
+        "purpose": "Section <h2> labels: SHOWS, VIDEOS, MUSIC, ABOUT, NEWSLETTER. Always all-caps, always paired with Reflection."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Bio copy, modal content, show venue text. Max-width 720px for reading comfort."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Copyright, sublabels (UPCOMING, NEW RELEASE), metadata, form field labels. Wide tracking at small size."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "transition-fast",
+        "value": "200ms ease",
+        "purpose": "Color transitions on nav links and interactive text."
+      },
+      {
+        "name": "transition-medium",
+        "value": "300ms ease",
+        "purpose": "Opacity transitions on images and modal overlays."
+      },
+      {
+        "name": "drawer-slide",
+        "value": "translateX: 200ms ease",
+        "purpose": "Mobile nav drawer slide-in. Paired with opacity transition."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px", "note": "Audio section stacks to two columns; touch-scale targets confirmed." },
+      { "name": "md", "value": "768px", "note": "Nav switches from hamburger to horizontal links; container padding increases." },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" },
+      { "name": "max", "value": "1440px", "note": "Container max-width cap." }
+    ]
+  },
+  "components": [
+    {
+      "name": "CTA Pill",
+      "kind": "button",
+      "refersTo": "cta-pill",
+      "description": "The only interactive button shape in the system. Used for every action: releases, tickets, contact, submit.",
+      "html": "<button class=\"ds-cta-pill\"><span class=\"ds-cta-pill__icon\"><svg width=\"8\" height=\"9\" viewBox=\"0 0 8 9\" fill=\"none\"><path d=\"M8 4.5L0 9L0 0L8 4.5Z\" fill=\"#161616\"/></svg></span><span>EP OUT NOW</span></button>",
+      "css": ".ds-cta-pill { display: inline-flex; align-items: center; gap: 8px; border-radius: 9999px; border: 0.4px solid rgba(246,246,246,0.4); background: #161616; padding: 8px 16px 8px 8px; font-size: 0.875rem; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #ffffff; cursor: pointer; transition: opacity 200ms ease; min-height: 44px; } .ds-cta-pill:hover { opacity: 0.8; } .ds-cta-pill:focus-visible { outline: none; box-shadow: 0 0 0 2px rgba(255,255,255,0.6), 0 0 0 4px #0e2795; } .ds-cta-pill__icon { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: #ffffff; flex-shrink: 0; }"
+    },
+    {
+      "name": "Nav Link (Desktop)",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Horizontal desktop navigation link. Active state underlined. Inactive state at white/60.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav__link\" href=\"#\">Music</a><a class=\"ds-nav__link ds-nav__link--active\" href=\"#\">Shows</a><a class=\"ds-nav__link\" href=\"#\">Videos</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 28px; } .ds-nav__link { font-size: 0.875rem; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(255,255,255,0.6); text-decoration: none; border-radius: 2px; transition: color 200ms ease; padding-bottom: 2px; } .ds-nav__link:hover { color: #ffffff; } .ds-nav__link--active { color: #ffffff; border-bottom: 1px solid #ffffff; } .ds-nav__link:focus-visible { outline: none; box-shadow: 0 0 0 2px rgba(255,255,255,0.6); }"
+    },
+    {
+      "name": "Show Row",
+      "kind": "custom",
+      "description": "Three-column grid listing for a live performance. Date | City+Venue | Ticket CTA.",
+      "html": "<div class=\"ds-show-row\"><div class=\"ds-show-row__date\">05.17</div><div class=\"ds-show-row__info\"><div class=\"ds-show-row__city\">HELSINKI</div><div class=\"ds-show-row__venue\">Tavastia Club</div></div><button class=\"ds-cta-pill\"><span class=\"ds-cta-pill__icon\"><svg width=\"8\" height=\"9\" viewBox=\"0 0 8 9\" fill=\"none\"><path d=\"M8 4.5L0 9L0 0L8 4.5Z\" fill=\"#161616\"/></svg></span><span>Tickets</span></button></div>",
+      "css": ".ds-show-row { display: grid; grid-template-columns: 64px 1fr auto; align-items: center; gap: 20px; padding: 20px 0; border-top: 1px solid rgba(255,255,255,0.2); font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; } .ds-show-row__date { font-weight: 700; font-size: 1rem; letter-spacing: 0.05em; color: #ffffff; } .ds-show-row__info { display: flex; flex-direction: column; gap: 2px; min-width: 0; } .ds-show-row__city { font-weight: 700; font-size: 1rem; letter-spacing: 0.08em; text-transform: uppercase; color: #ffffff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .ds-show-row__venue { font-size: 0.8rem; color: rgba(255,255,255,0.6); }"
+    },
+    {
+      "name": "Video Card",
+      "kind": "card",
+      "description": "Secondary video thumbnail in the grid. 16:10 ratio, semi-transparent play button, bold uppercase caption.",
+      "html": "<a class=\"ds-video-card\" href=\"#\"><div class=\"ds-video-card__thumb\"><div class=\"ds-video-card__overlay\"></div><div class=\"ds-video-card__play\"><svg width=\"10\" height=\"11\" viewBox=\"0 0 8 9\" fill=\"none\"><path d=\"M8 4.5L0 9L0 0L8 4.5Z\" fill=\"white\"/></svg></div></div><div class=\"ds-video-card__caption\"><span class=\"ds-video-card__title\">MUSIC VIDEO</span><span class=\"ds-video-card__meta\">2025</span></div></a>",
+      "css": ".ds-video-card { display: flex; flex-direction: column; gap: 10px; text-decoration: none; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; } .ds-video-card:focus-visible { outline: none; box-shadow: 0 0 0 2px rgba(255,255,255,0.6); } .ds-video-card__thumb { aspect-ratio: 16/10; background: rgba(255,255,255,0.08); position: relative; overflow: hidden; } .ds-video-card__overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,206,229,0.08), rgba(0,47,109,0.6)); } .ds-video-card__play { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; } .ds-video-card__caption { display: flex; justify-content: space-between; align-items: baseline; } .ds-video-card__title { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #ffffff; } .ds-video-card__meta { font-size: 0.68rem; color: rgba(255,255,255,0.55); }"
+    },
+    {
+      "name": "About Card",
+      "kind": "card",
+      "description": "The single card in the system. Bordered, transparent, used once for the bio snippet.",
+      "html": "<div class=\"ds-about-card\"><h2 class=\"ds-about-card__heading\">ABOUT</h2><p class=\"ds-about-card__body\">Finnish-Nigerian singer-songwriter crafting intimate R&B from the cobalt deep.</p></div>",
+      "css": ".ds-about-card { border: 1px solid rgba(255,255,255,0.7); border-radius: 12px; padding: clamp(20px, 4vw, 36px); display: grid; gap: 18px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; } .ds-about-card__heading { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; letter-spacing: 0.1em; color: #ffffff; } .ds-about-card__body { font-size: 1rem; font-weight: 500; letter-spacing: 0.005em; line-height: 1.55; color: rgba(255,255,255,0.82); max-width: 720px; }"
+    },
+    {
+      "name": "Section Heading with Reflection",
+      "kind": "custom",
+      "description": "Every section <h2> in the site. The heading plus its mirrored ghost below. Both are encapsulated in the <Reflection> React component.",
+      "html": "<div class=\"ds-section-heading\"><h2 class=\"ds-section-heading__text\">SHOWS</h2><div class=\"ds-section-heading__reflection-wrap\"><span aria-hidden=\"true\" class=\"ds-section-heading__reflection\">SHOWS</span></div></div>",
+      "css": ".ds-section-heading { display: block; } .ds-section-heading__text { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; letter-spacing: 0.1em; line-height: 1; color: #ffffff; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; } .ds-section-heading__reflection-wrap { height: 1.25rem; overflow: hidden; margin-top: -0.22em; } .ds-section-heading__reflection { display: block; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; letter-spacing: 0.1em; line-height: 1; color: transparent; transform: scaleY(-1); background-image: linear-gradient(to top, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 50%); -webkit-background-clip: text; background-clip: text; pointer-events: none; user-select: none; margin-top: -0.22em; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Warm Signal",
+    "overview": "The cobalt blue is not cold — it is the deep from which warmth rises. Pink and gold are the signal: music bleeding through the surface, emotion transmitted through type. Every design decision asks: does this carry the signal, or does it interfere with it?\n\nThis system is built on a single surface — one unwavering cobalt blue — and trusts that restraint creates more emotional weight than variety. The photography is not placed on the background; it becomes the background, ghosted in via mix-blend-lighten so Adeola inhabits the blue rather than floating above it. Giant display type reflects itself into the void below, vanishing into cobalt like sound fading out. Warmth lives only in the text: the blush-to-deep-blue gradient on emotional copy, gold on numerical accents, the pink text selection state. Everything else is white on cobalt.",
+    "keyCharacteristics": [
+      "Single cobalt surface — no tonal variants, no page background gradients, ever",
+      "System font only — Helvetica Neue is the intentional choice, not a fallback",
+      "Warmth lives in text treatments — blush and gold appear only as accent fills, never as surfaces",
+      "Ghost photography — mix-blend-lighten dissolves the artist into the blue",
+      "Reflection signature — giant display type mirrors itself below, fading into cobalt",
+      "White opacity hierarchy — white/60, /40, /30, /20, /10 replace introducing new greys"
+    ],
+    "rules": [
+      { "name": "The Cobalt-Only Rule", "body": "The page background is always #0e2795. It is not layered, tinted, or broken by sections. If you're adding a background color anywhere, the answer is cobalt.", "section": "colors" },
+      { "name": "The Warmth-Rises Rule", "body": "Blush and gold appear only as gradient fills inside background-clip: text treatments. They are never used as button backgrounds, card tints, border colors, or any other surface. Their rarity is the signal.", "section": "colors" },
+      { "name": "The Opacity Hierarchy", "body": "Muted text and subtle borders are always achieved by reducing white's opacity — rgba(255,255,255,N) — never by introducing a new grey.", "section": "colors" },
+      { "name": "The Caps-for-Identity Rule", "body": "All-caps is reserved for section headers, show titles, identity labels, and product-statement CTAs. Navigation links and conversational CTAs are mixed case.", "section": "typography" },
+      { "name": "The System-Only Rule", "body": "No web fonts. The warmth comes from scale and tracking, not from font personality.", "section": "typography" },
+      { "name": "The No-Shadow Rule", "body": "No box-shadow anywhere. If an element needs to feel elevated, use a border or opacity tint.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use #0e2795 for every page background. The single surface is the identity.",
+      "Do use white opacity variants (white/60, white/40, etc.) for hierarchy — never introduce a new grey.",
+      "Do pair every section <h2> with a <Reflection> component underneath.",
+      "Do use mix-blend-lighten for the hero/artist photograph.",
+      "Do keep the CTA pill shape (fully round) as the only button form.",
+      "Do set min-height: 44px on every interactive element for mobile touch compliance.",
+      "Do use all-caps + wide tracking (0.1em) for section headers, show titles, and identity labels."
+    ],
+    "donts": [
+      "Don't introduce a second background color. One surface.",
+      "Don't add box-shadows anywhere.",
+      "Don't use blush or gold as surface colors, border colors, or button backgrounds.",
+      "Don't load a web font.",
+      "Don't make the site feel like a streaming platform artist profile — no cold metric grids, no algorithm-driven layouts.",
+      "Don't use the EDM festival register — no neon, no aggressive hype copy.",
+      "Don't over-design with competing effects — glassmorphism cards, multi-layer gradients, decorative illustrations.",
+      "Don't add new grey values. Use rgba(255,255,255,N) over cobalt.",
+      "Don't use backdrop-filter: blur() on persistent elements. Reserved for the contact modal overlay only.",
+      "Don't use border-left or border-right as a colored accent stripe."
+    ]
+  }
+}

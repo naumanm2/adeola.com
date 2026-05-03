@@ -6,8 +6,9 @@ import SmoothScroll from './components/smooth-scroll'
 import { SanityLive } from '@/sanity/lib/live'
 
 export const metadata: Metadata = {
-  title: 'Adeola',
-  description: 'Adeola',
+  title: 'Adeola — Singer · Songwriter',
+  description:
+    'Official site of Adeola Ikuesan — music, shows, videos, and more.',
 }
 
 export default function RootLayout({

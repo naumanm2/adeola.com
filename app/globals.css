@@ -39,9 +39,9 @@
     rgba(246, 246, 246, 0) 100%
   );
   --gradient-reflection: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.2) 0%,
-    rgba(255, 255, 255, 0) 70%
+    to top,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0) 50%
   );
 
   /* Semantic */
@@ -197,6 +197,7 @@ h1 {
 /* Apply to a flipped duplicate element underneath display type.
    Pairs with .display-giant on ADE, SHOWS, ADEOLA wordmarks. */
 .reflect {
+  display: block;
   transform: scaleY(-1);
   background-image: var(--gradient-reflection);
   -webkit-background-clip: text;
@@ -204,5 +205,5 @@ h1 {
   color: transparent;
   pointer-events: none;
   user-select: none;
-  margin-top: 2px;
+  margin-top: -0.22em;
 }

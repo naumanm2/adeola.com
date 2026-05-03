@@ -1,19 +1,22 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import CTA from './cta'
 
 export default function ContactModal({
   open,
   onClose,
+  triggerRef,
 }: {
   open: boolean
   onClose: () => void
+  triggerRef?: React.RefObject<HTMLElement | null>
 }) {
   const [sent, setSent] = useState(false)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
+  const contentRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (!open) return
@@ -24,8 +27,17 @@ export default function ContactModal({
     return () => document.removeEventListener('keydown', onKey)
   }, [open, onClose])
 
+  useEffect(() => {
+    if (!open) return
+    const el = contentRef.current?.querySelector<HTMLElement>(
+      'input, textarea, button'
+    )
+    el?.focus()
+  }, [open])
+
   function handleClose() {
     onClose()
+    triggerRef?.current?.focus()
     setTimeout(() => {
       setSent(false)
       setName('')
@@ -47,14 +59,15 @@ export default function ContactModal({
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Contact form"
+      aria-labelledby="contact-modal-title"
       onClick={(e) => {
         if (e.target === e.currentTarget) handleClose()
       }}
       className="fixed inset-0 z-[9000] flex items-center justify-center p-6"
-      style={{ background: 'rgba(4,12,40,0.72)', backdropFilter: 'blur(10px)' }}
+      style={{ background: 'rgba(4,12,40,0.72)', backdropFilter: 'blur(4px)' }}
     >
       <div
+        ref={contentRef}
         className="relative flex w-full max-w-[480px] flex-col gap-7"
         style={{
           background: '#0e2795',
@@ -72,9 +85,12 @@ export default function ContactModal({
           ✕
         </button>
 
-        <p style={{ fontSize: '1.4rem', fontWeight: 700, letterSpacing: '0.06em' }}>
+        <h2
+          id="contact-modal-title"
+          style={{ fontSize: '1.4rem', fontWeight: 700, letterSpacing: '0.06em' }}
+        >
           GET IN TOUCH
-        </p>
+        </h2>
 
         {sent ? (
           <p
@@ -85,7 +101,7 @@ export default function ContactModal({
               paddingBottom: 12,
             }}
           >
-            Thanks — I&apos;ll get back to you.
+            Thanks. I&apos;ll get back to you.
           </p>
         ) : (
           <form
@@ -157,7 +173,7 @@ export default function ContactModal({
                 id="contact-message"
                 required
                 rows={4}
-                placeholder="What&apos;s on your mind?"
+                placeholder="What's on your mind?"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 className="resize-none bg-transparent py-2.5 text-base text-white outline-none placeholder:text-white/30"

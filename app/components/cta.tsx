@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 const pillClass =
-  'inline-flex items-center gap-2 rounded-full border-[0.4px] border-[rgba(246,246,246,0.4)] bg-[#161616] p-1.5 pr-3.5 text-sm text-white transition-opacity duration-200 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0e2795]'
+  'inline-flex items-center gap-2 rounded-full border-[0.4px] border-[rgba(246,246,246,0.4)] bg-[#161616] p-2 pr-4 text-sm text-white transition-opacity duration-200 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0e2795]'
 
 function IconCircle() {
   return (

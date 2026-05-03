@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { sanityFetch } from '@/sanity/lib/live'
 import { urlFor, hasAsset } from '@/sanity/lib/image'
 import CTA from '../cta'
+import Reflection from '../reflection'
 
 type Track = {
   _id: string
@@ -41,15 +42,8 @@ export default async function AudioSection() {
 
   return (
     <section id="music" className="scroll-mt-24 pt-10 pb-[30px]">
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'baseline',
-          marginBottom: 8,
-        }}
-      >
-        <div
+      <div style={{ marginBottom: 8 }}>
+        <h2
           style={{
             fontWeight: 700,
             fontSize: 'clamp(2rem, 5vw, 3rem)',
@@ -58,7 +52,10 @@ export default async function AudioSection() {
           }}
         >
           MUSIC
-        </div>
+        </h2>
+        <Reflection style={{ fontWeight: 700, fontSize: 'clamp(2rem, 5vw, 3rem)', letterSpacing: '0.1em', lineHeight: 1 }}>
+          MUSIC
+        </Reflection>
       </div>
       <div
         style={{
@@ -71,14 +68,7 @@ export default async function AudioSection() {
         NEW RELEASE
       </div>
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'minmax(160px, 220px) 1fr',
-          gap: 28,
-          alignItems: 'center',
-        }}
-      >
+      <div className="grid grid-cols-1 items-start gap-7 sm:grid-cols-[minmax(160px,220px)_1fr] sm:items-center">
         {/* EP cover */}
         <div
           style={{
@@ -86,6 +76,7 @@ export default async function AudioSection() {
             overflow: 'hidden',
             background: 'rgba(255,255,255,0.06)',
             position: 'relative',
+            maxWidth: 220,
           }}
         >
           {hasAsset(track.coverImage) ? (

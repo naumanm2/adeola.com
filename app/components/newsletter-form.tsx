@@ -23,7 +23,7 @@ export default function NewsletterForm() {
           paddingBottom: 10,
         }}
       >
-        Thanks — I&apos;ll be in touch.
+        Thanks. I&apos;ll be in touch.
       </p>
     )
   }
@@ -39,7 +39,11 @@ export default function NewsletterForm() {
         paddingBottom: 8,
       }}
     >
+      <label htmlFor="newsletter-email" className="sr-only">
+        Email address
+      </label>
       <input
+        id="newsletter-email"
         type="email"
         required
         value={email}
