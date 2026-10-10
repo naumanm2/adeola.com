@@ -192,6 +192,15 @@ h1 {
   background-clip: text;
   color: transparent;
 }
+/* Bio text: start the fade halfway through the text, below the inline photo */
+.bio-fade {
+  background-image: linear-gradient(
+    180deg,
+    #ffcee5 0,
+    #ffcee5 calc(var(--bio-img-h, 0px) + (100% - var(--bio-img-h, 0px)) * 0.5),
+    #002f6d 100%
+  );
+}
 .text-gradient-gold {
   background-image: var(--gradient-text-gold);
   -webkit-background-clip: text;
@@ -203,6 +212,16 @@ h1 {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* About card: hold full white for the first lines, keep the last line faintly visible */
+.about-fade {
+  background-image: linear-gradient(
+    180deg,
+    #f6f6f6 0%,
+    #f6f6f6 25%,
+    rgba(246, 246, 246, 0.15) 100%
+  );
 }
 
 /* ── Signature reflection ────────────────────────────────── */

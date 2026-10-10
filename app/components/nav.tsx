@@ -1,18 +1,21 @@
 'use client'
 
+import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import CTA from './cta'
 import ContactModal from './contact-modal'
 
+// `href` without a hash is a separate page; hash links are home-page sections
 const links = [
-  { id: 'music', label: 'Music' },
-  { id: 'shows', label: 'Shows' },
-  { id: 'video', label: 'Videos' },
-  { id: 'about', label: 'About' },
-  { id: 'newsletter', label: 'Newsletter' },
+  { id: 'music', label: 'Music', href: '/#music' },
+  { id: 'shows', label: 'Shows', href: '/shows' },
+  { id: 'video', label: 'Videos', href: '/#video' },
+  { id: 'about', label: 'About', href: '/about' },
+  { id: 'newsletter', label: 'Newsletter', href: '/#newsletter' },
 ]
 
 export default function Nav() {
+  const pathname = usePathname()
   const [open, setOpen] = useState(false)
   const [activeId, setActiveId] = useState<string | null>(null)
   const [contactOpen, setContactOpen] = useState(false)
@@ -80,12 +83,14 @@ export default function Nav() {
 
         {/* Desktop links */}
         <div className="hidden items-center gap-7 md:flex">
-          {links.map(({ id, label }) => {
-            const active = activeId === id
+          {links.map(({ id, label, href }) => {
+            const active = href.includes('#')
+              ? activeId === id
+              : pathname === href
             return (
               <a
                 key={id}
-                href={`/#${id}`}
+                href={href}
                 aria-current={active ? 'true' : undefined}
                 className={`nav-link rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0e2795] ${
                   active ? 'nav-link--active border-b border-white pb-0.5' : ''
@@ -151,12 +156,14 @@ export default function Nav() {
             open ? 'translate-x-0' : '-translate-x-4'
           }`}
         >
-          {links.map(({ id, label }) => {
-            const active = activeId === id
+          {links.map(({ id, label, href }) => {
+            const active = href.includes('#')
+              ? activeId === id
+              : pathname === href
             return (
               <a
                 key={id}
-                href={`/#${id}`}
+                href={href}
                 onClick={() => setOpen(false)}
                 aria-current={active ? 'true' : undefined}
                 className={`rounded-sm text-3xl font-bold uppercase tracking-widest focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:text-4xl ${
@@ -171,7 +178,8 @@ export default function Nav() {
             <CTA
               text="Contact"
               onClick={() => {
-                contactTriggerRef.current = document.activeElement as HTMLElement
+                contactTriggerRef.current =
+                  document.activeElement as HTMLElement
                 setOpen(false)
                 setContactOpen(true)
               }}

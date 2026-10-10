@@ -11,10 +11,8 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      { source: '/shows', destination: '/#shows', permanent: true },
       { source: '/audio', destination: '/#audio', permanent: true },
-      { source: '/video', destination: '/#video', permanent: true },
-      { source: '/about', destination: '/#about', permanent: true },
+      { source: '/video', destination: '/videos', permanent: true },
     ]
   },
 }
