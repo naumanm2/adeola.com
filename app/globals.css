@@ -86,6 +86,18 @@ h1 {
   font-weight: 700;
 }
 
+/* Home hero title spans the full content width on mobile.
+   "ADEOLA" is ~3.92em wide; 2.5rem = Container's px-5 gutters. */
+.hero-title {
+  font-size: calc((100vw - 2.5rem) / 3.95);
+}
+
+@media (min-width: 768px) {
+  .hero-title {
+    font-size: clamp(3.2rem, 11vw, 7.5rem);
+  }
+}
+
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,

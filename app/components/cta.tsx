@@ -28,6 +28,7 @@ export default function CTA({
   ariaLabel,
   onClick,
   type = 'button',
+  className,
 }: {
   link?: string
   text: string
@@ -35,7 +36,10 @@ export default function CTA({
   ariaLabel?: string
   onClick?: () => void
   type?: 'button' | 'submit'
+  className?: string
 }) {
+  const classes = className ? `${pillClass} ${className}` : pillClass
+
   if (link) {
     return (
       <Link
@@ -43,7 +47,7 @@ export default function CTA({
         target={external ? '_blank' : undefined}
         rel={external ? 'noopener noreferrer' : undefined}
         aria-label={text ? undefined : ariaLabel}
-        className={pillClass}
+        className={classes}
       >
         <IconCircle />
         {text && <span>{text}</span>}
@@ -56,7 +60,7 @@ export default function CTA({
       type={type}
       onClick={onClick}
       aria-label={text ? undefined : ariaLabel}
-      className={pillClass}
+      className={classes}
     >
       <IconCircle />
       {text && <span>{text}</span>}
