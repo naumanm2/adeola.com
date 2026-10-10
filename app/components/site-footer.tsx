@@ -27,32 +27,56 @@ const SOCIAL_ICONS: Record<string, React.ReactNode> = {
     </svg>
   ),
   spotify: (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+    >
       <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 0 1-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.622.622 0 1 1-.277-1.215c3.809-.87 7.076-.496 9.712 1.115.294.181.387.564.207.857zm1.223-2.722a.78.78 0 0 1-1.072.258c-2.687-1.652-6.785-2.13-9.965-1.165a.78.78 0 0 1-.973-.519.781.781 0 0 1 .519-.972c3.632-1.102 8.147-.568 11.234 1.326a.78.78 0 0 1 .257 1.072zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71a.937.937 0 1 1-.543-1.794c3.514-1.066 9.354-.86 13.045 1.345a.937.937 0 0 1-.885 1.606z" />
     </svg>
   ),
   'apple music': (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+    >
       <path d="M23 6.998v9.01c0 2.76-2.24 5-5 5H6c-2.76 0-5-2.24-5-5v-9.01c0-2.76 2.24-5 5-5h12c2.76 0 5 2.24 5 5zm-6.987-1.02L9.96 7.808v5.99c-.327-.094-.672-.149-1.03-.149-1.768 0-3.2 1.19-3.2 2.66s1.432 2.66 3.2 2.66 3.2-1.19 3.2-2.66V9.62l4.053-1.365v4.533c-.327-.094-.672-.149-1.03-.149-1.768 0-3.2 1.19-3.2 2.66s1.432 2.66 3.2 2.66S18.353 16.76 18.353 15.3V7.408l-2.34.57z" />
     </svg>
   ),
   youtube: (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+    >
       <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
     </svg>
   ),
   tiktok: (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+    >
       <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.95a8.28 8.28 0 0 0 4.84 1.54V7.03a4.85 4.85 0 0 1-1.07-.34z" />
     </svg>
   ),
   bandcamp: (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+    >
       <path d="M0 18.75l7.437-13.5H24l-7.438 13.5z" />
     </svg>
   ),
   twitter: (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+    >
       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.213 5.567 5.95-5.567zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
     </svg>
   ),
@@ -65,8 +89,8 @@ export default async function SiteFooter() {
 
   return (
     <footer
-      className="flex flex-col"
-      style={{ gap: 44, paddingTop: 60, paddingBottom: 20 }}
+      className="flex flex-col pt-3 md:pt-[60px]"
+      style={{ gap: 44, paddingBottom: 20 }}
     >
       {/* Newsletter */}
       <div
@@ -90,7 +114,14 @@ export default async function SiteFooter() {
           >
             NEWSLETTER
           </h2>
-          <Reflection style={{ fontWeight: 700, fontSize: 'clamp(2rem, 5vw, 3rem)', letterSpacing: '0.1em', lineHeight: 1 }}>
+          <Reflection
+            style={{
+              fontWeight: 700,
+              fontSize: 'clamp(2rem, 5vw, 3rem)',
+              letterSpacing: '0.1em',
+              lineHeight: 1,
+            }}
+          >
             NEWSLETTER
           </Reflection>
         </div>

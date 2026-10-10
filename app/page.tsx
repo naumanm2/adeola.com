@@ -4,14 +4,15 @@ import { urlFor, hasAsset } from '@/sanity/lib/image'
 import CTA from './components/cta'
 import AudioPlayer from './components/audio-player'
 import SiteFooter from './components/site-footer'
-import ShowsSection from './components/sections/shows-section'
 import VideoSection from './components/sections/video-section'
+import GallerySection from './components/sections/gallery-section'
 import AboutSection from './components/sections/about-section'
 
 const HERO_QUERY = `{
   "general": *[_type == "general"][0]{
     title,
     mainImage,
+    profileImage,
     introShort
   },
   "track": *[_type == "audio"] | order(_createdAt desc)[0]{
@@ -30,7 +31,7 @@ export default async function Home() {
   return (
     <div>
       {/* Hero */}
-      <section className="pt-10 pb-10">
+      <section className="pt-10 pb-3 md:pb-10">
         {/* Text sits above the image, which is pulled up behind the title */}
         <div className="relative z-10">
           <div
@@ -92,24 +93,41 @@ export default async function Home() {
 
       {/* Bio quote */}
       {general?.introShort && (
-        <section className="pt-5 pb-[30px]">
-          <p
-            className="text-gradient-pink-blue m-0"
-            style={{
-              fontSize: 'clamp(1.3rem, 3.2vw, 2rem)',
-              fontWeight: 500,
-              letterSpacing: '0.01em',
-              lineHeight: 1.2,
-              maxWidth: 780,
-            }}
-          >
-            {general.introShort}
-          </p>
+        <section className="py-3 md:pt-5 md:pb-[30px]">
+          {/* Container so the photo width (cqw) tracks the text column */}
+          <div className="max-w-[780px] [container-type:inline-size]">
+            <p
+              className="text-gradient-pink-blue bio-fade m-0"
+              style={{
+                fontSize: 'clamp(1.3rem, 3.2vw, 2rem)',
+                fontWeight: 500,
+                letterSpacing: '0.01em',
+                lineHeight: 1.2,
+                ...(hasAsset(general.profileImage) && {
+                  '--bio-img-w': 'min(47cqw, 280px)',
+                  '--bio-img-h': 'calc(var(--bio-img-w) * 1.5)',
+                }),
+              }}
+            >
+              {/* Inline-block photo: text starts on its bottom edge, then wraps below */}
+              {hasAsset(general.profileImage) && (
+                <Image
+                  src={urlFor(general.profileImage).width(600).url()}
+                  alt={general.profileImage.alt ?? ''}
+                  width={600}
+                  height={900}
+                  sizes="(min-width: 640px) 280px, 47vw"
+                  className="mr-2 inline-block h-[var(--bio-img-h)] w-[var(--bio-img-w)] object-cover align-baseline"
+                />
+              )}
+              {general.introShort}
+            </p>
+          </div>
         </section>
       )}
 
       <VideoSection />
-      <ShowsSection />
+      <GallerySection />
       <AboutSection />
       <SiteFooter />
     </div>

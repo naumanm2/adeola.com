@@ -49,6 +49,28 @@ export default defineType({
       ],
     }),
     defineField({
+      name: 'gallery',
+      title: 'Photo Gallery',
+      description:
+        'Photos shown in the swipeable gallery after the Videos section on the front page. Drag to reorder.',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alternative text',
+              description: 'Describe the photo for screen readers.',
+            },
+          ],
+        },
+      ],
+      options: { layout: 'grid' },
+    }),
+    defineField({
       name: 'phone',
       title: 'Phone Number',
       type: 'string',
@@ -115,6 +137,14 @@ export default defineType({
       description: 'Short intro text. Present in front page.',
       type: 'string',
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'aboutText',
+      title: 'About Card Text',
+      description:
+        'Teaser shown in the About card on the front page. Fades out and links to the full bio.',
+      type: 'text',
+      rows: 5,
     }),
     defineField({
       name: 'introLong',

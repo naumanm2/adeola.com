@@ -1,15 +1,19 @@
 import { sanityFetch } from '@/sanity/lib/live'
+import CTA from '../cta'
 import Reflection from '../reflection'
 
 const GENERAL_QUERY = `*[_type == "general"][0]{
+  aboutText,
   introShort
 }`
 
 export default async function AboutSection() {
   const { data: general } = await sanityFetch({ query: GENERAL_QUERY })
+  // Falls back to the short intro until "About Card Text" is filled in Studio
+  const text: string | undefined = general?.aboutText || general?.introShort
 
   return (
-    <section id="about" className="scroll-mt-24 pt-10 pb-[30px]">
+    <section id="about" className="scroll-mt-24 py-3 md:pt-10 md:pb-[30px]">
       <div
         style={{
           border: '1px solid rgba(255,255,255,0.7)',
@@ -30,25 +34,25 @@ export default async function AboutSection() {
           >
             ABOUT
           </h2>
-          <Reflection style={{ fontWeight: 700, fontSize: 'clamp(1.4rem, 3vw, 2rem)', letterSpacing: '0.1em', lineHeight: 1 }}>
+          <Reflection
+            style={{
+              fontWeight: 700,
+              fontSize: 'clamp(1.4rem, 3vw, 2rem)',
+              letterSpacing: '0.1em',
+              lineHeight: 1,
+            }}
+          >
             ABOUT
           </Reflection>
         </div>
-        {general?.introShort && (
-          <p
-            style={{
-              fontSize: '1rem',
-              fontWeight: 500,
-              letterSpacing: '0.005em',
-              lineHeight: 1.55,
-              margin: 0,
-              color: 'rgba(255,255,255,0.82)',
-              maxWidth: 720,
-            }}
-          >
-            {general.introShort}
+        {text && (
+          <p className="text-gradient-fade about-fade m-0 max-w-[720px] text-lg leading-[1.3] font-medium md:text-xl">
+            {text}
           </p>
         )}
+        <div className="mt-4">
+          <CTA link="/about" text="See full bio" className="w-full md:w-auto" />
+        </div>
       </div>
     </section>
   )
